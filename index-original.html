@@ -399,41 +399,82 @@
         
         /* Video Section */
         .video-section {
-            background: var(--color-charcoal);
-            padding: 12vh 5vw;
             position: relative;
+            min-height: 100vh;
+            background: var(--color-charcoal);
+            overflow: hidden;
         }
         
-        .video-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .video-section-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .video-header {
+        .video-background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .video-background .wistia_responsive_padding {
+            padding: 0 !important;
+            height: 100% !important;
+        }
+
+        .video-background .wistia_responsive_wrapper {
+            height: 100% !important;
+        }
+
+        .video-background .wistia_embed {
+            height: 100% !important;
+        }
+
+        .video-background video {
+            object-fit: cover !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(26, 26, 26, 0.5) 0%,
+                rgba(26, 26, 26, 0.3) 50%,
+                rgba(26, 26, 26, 0.6) 100%
+            );
+            z-index: 1;
+        }
+        
+        .video-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            margin-bottom: 4rem;
+            color: var(--color-text-light);
+            padding: 0 5vw;
+            max-width: 800px;
         }
         
         .video-title {
             font-family: var(--font-serif);
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 400;
             letter-spacing: -0.02em;
             color: var(--color-sand);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
         
         .video-subtitle {
-            font-size: 1rem;
-            color: rgba(244, 244, 241, 0.6);
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            color: rgba(244, 244, 241, 0.8);
             letter-spacing: 0.05em;
-        }
-        
-        .video-wrapper {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            line-height: 1.6;
         }
 
         /* Engineering Section */
@@ -1150,25 +1191,30 @@
     </section>
 
     <!-- Video Section -->
-    <section class="video-section">
-        <div class="video-container">
-            <div class="video-header">
-                <h2 class="video-title">Experience Breath Trailer</h2>
-                <p class="video-subtitle">See how we redefine adventure living</p>
-            </div>
-            
-            <div class="video-wrapper">
+    <section class="video-section" id="video-experience">
+        <div class="video-section-sticky">
+            <!-- Video Background -->
+            <div class="video-background">
                 <script src="https://fast.wistia.com/embed/medias/208j22fnl5.jsonp" async></script>
                 <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
                 <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
                     <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
-                        <div class="wistia_embed wistia_async_208j22fnl5 seo=true videoFoam=true" style="height:100%;position:relative;width:100%">
+                        <div class="wistia_embed wistia_async_208j22fnl5 seo=false videoFoam=false playbar=false controlsVisibleOnLoad=false" style="height:100%;position:relative;width:100%" id="wistia-video-bg">
                             <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
-                                <img src="https://fast.wistia.com/embed/medias/208j22fnl5/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
+                                <img src="https://fast.wistia.com/embed/medias/208j22fnl5/swatch" style="filter:blur(5px);height:100%;object-fit:cover;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Overlay -->
+            <div class="video-overlay"></div>
+            
+            <!-- Content over video -->
+            <div class="video-content">
+                <h2 class="video-title">Experience Breath Trailer</h2>
+                <p class="video-subtitle">See how we redefine adventure living with lightweight engineering and thoughtful design</p>
             </div>
         </div>
     </section>
@@ -1370,6 +1416,54 @@
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Wistia Video Background Auto-play on Scroll
+        window._wq = window._wq || [];
+        _wq.push({
+            id: "208j22fnl5",
+            onReady: function(video) {
+                const videoSection = document.getElementById('video-experience');
+                let hasPlayed = false;
+
+                // Create ScrollTrigger for video section
+                ScrollTrigger.create({
+                    trigger: videoSection,
+                    start: "top center",
+                    end: "bottom center",
+                    onEnter: () => {
+                        video.play();
+                        video.mute(); // Mute for autoplay compliance
+                        hasPlayed = true;
+                    },
+                    onEnterBack: () => {
+                        if (hasPlayed) {
+                            video.play();
+                        }
+                    },
+                    onLeave: () => {
+                        video.pause();
+                    },
+                    onLeaveBack: () => {
+                        video.pause();
+                    }
+                });
+
+                // Set video to loop
+                video.bind('end', function() {
+                    video.time(0);
+                    video.play();
+                });
+
+                // Optional: Unmute on click
+                videoSection.addEventListener('click', () => {
+                    if (video.isMuted()) {
+                        video.unmute();
+                    } else {
+                        video.mute();
+                    }
+                });
+            }
+        });
 
         // GSAP ScrollTrigger setup
         gsap.registerPlugin(ScrollTrigger);
