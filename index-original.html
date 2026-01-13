@@ -396,6 +396,45 @@
             transform: scaleX(0);
             transform-origin: left;
         }
+        
+        /* Video Section */
+        .video-section {
+            background: var(--color-charcoal);
+            padding: 12vh 5vw;
+            position: relative;
+        }
+        
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .video-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .video-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--color-sand);
+            margin-bottom: 1rem;
+        }
+        
+        .video-subtitle {
+            font-size: 1rem;
+            color: rgba(244, 244, 241, 0.6);
+            letter-spacing: 0.05em;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
 
         /* Engineering Section */
         .engineering {
@@ -1029,17 +1068,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-video-container">
-            <script src="https://fast.wistia.com/embed/medias/208j22fnl5.jsonp" async></script>
-            <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
-            <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
-                <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
-                    <div class="wistia_embed wistia_async_208j22fnl5 seo=true videoFoam=true" style="height:100%;position:relative;width:100%">
-                        <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
-                            <img src="https://fast.wistia.com/embed/medias/208j22fnl5/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <img src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-5-1--min-AMqny1RVrkFQwzXp.jpg" alt="Breath Trailer" class="hero-video" style="object-fit: cover; width: 100%; height: 100%;">
             <div class="hero-overlay"></div>
         </div>
 
@@ -1102,6 +1131,30 @@
             </p>
         </div>
         <div class="manifesto-divider"></div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-container">
+            <div class="video-header">
+                <h2 class="video-title">Experience Breath Trailer</h2>
+                <p class="video-subtitle">See how we redefine adventure living</p>
+            </div>
+            
+            <div class="video-wrapper">
+                <script src="https://fast.wistia.com/embed/medias/208j22fnl5.jsonp" async></script>
+                <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+                <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+                    <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+                        <div class="wistia_embed wistia_async_208j22fnl5 seo=true videoFoam=true" style="height:100%;position:relative;width:100%">
+                            <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
+                                <img src="https://fast.wistia.com/embed/medias/208j22fnl5/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Engineering Section -->
