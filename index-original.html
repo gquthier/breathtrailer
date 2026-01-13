@@ -108,12 +108,21 @@
         }
 
         .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             font-family: var(--font-serif);
             font-size: 1.5rem;
             font-weight: 500;
             color: var(--color-text-light);
             letter-spacing: -0.02em;
             text-decoration: none;
+        }
+        
+        .nav-logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
 
         .nav-links {
@@ -1005,7 +1014,10 @@
 
     <!-- Navigation -->
     <nav class="nav">
-        <a href="#" class="nav-logo">Breath</a>
+        <a href="#" class="nav-logo">
+            <img src="logobreath.avif" alt="Breath Trailer" class="nav-logo-img">
+            <span>Breath Trailer</span>
+        </a>
         <ul class="nav-links">
             <li><a href="#" data-cursor-hover>Models</a></li>
             <li><a href="#" data-cursor-hover>Configurator</a></li>
@@ -1017,9 +1029,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-video-container">
-            <video class="hero-video" autoplay muted loop playsinline>
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-car-traveling-on-an-asphalt-road-in-the-middle-of-a-26386-large.mp4" type="video/mp4">
-            </video>
+            <img src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-5-1--min-AMqny1RVrkFQwzXp.jpg" alt="Breath Trailer" class="hero-video" style="object-fit: cover; width: 100%; height: 100%;">
             <div class="hero-overlay"></div>
         </div>
 
@@ -1174,11 +1184,11 @@
 
         <div class="bento-grid">
             <div class="bento-item bento-item-1">
-                <img class="bento-image" src="https://images.unsplash.com/photo-1533873984035-25970ab07461?w=1200" alt="Adventure in nature">
+                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-26-AGBGklaB71uE8wWl.jpg" alt="Breath Trailer on coastal road">
             </div>
 
             <div class="bento-item bento-item-2">
-                <img class="bento-image" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800" alt="Sunset camping">
+                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-1-min-YKbJQ3noE6sPVVrE.jpg" alt="Breath Trailer at sunset">
             </div>
 
             <div class="bento-item bento-item-3">
@@ -1189,7 +1199,7 @@
             </div>
 
             <div class="bento-item bento-item-4">
-                <img class="bento-image" src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800" alt="Scenic road">
+                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breath-essential-palmtree-ALp7QwZpyEsOb2l3.jpeg" alt="Breath Trailer on tropical beach">
             </div>
 
             <div class="bento-item bento-item-5">
@@ -1200,11 +1210,11 @@
             </div>
 
             <div class="bento-item bento-item-6">
-                <img class="bento-image" src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=1200" alt="Comfortable interior">
+                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-7-min-ALpJ9P77BNFZaoqO.jpg" alt="Breath Trailer with kitchen open">
             </div>
 
             <div class="bento-item bento-item-7">
-                <img class="bento-image" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800" alt="On the road">
+                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-6-AE0pkbwM9qsnJ5E2.jpg" alt="Breath Trailers on beach at dusk">
             </div>
         </div>
 
@@ -1251,7 +1261,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <a href="#" class="footer-logo">Breath</a>
+            <a href="#" class="footer-logo">Breath Trailer</a>
 
             <ul class="footer-links">
                 <li><a href="#">Legal</a></li>

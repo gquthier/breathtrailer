@@ -81,12 +81,22 @@
         }
 
         .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             font-family: var(--font-serif);
             font-size: 1.5rem;
             font-weight: 500;
             color: var(--color-forest);
             letter-spacing: -0.02em;
             text-decoration: none;
+        }
+
+        .nav-logo-image {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .nav-links {
@@ -831,11 +841,20 @@
         }
 
         .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             font-family: var(--font-serif);
             font-size: 1.8rem;
             color: var(--color-white);
             margin-bottom: 1rem;
-            display: block;
+        }
+
+        .footer-logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .footer-description {
@@ -971,7 +990,10 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <a href="#" class="nav-logo">Breath</a>
+            <a href="#" class="nav-logo">
+                <img src="logobreath.avif" alt="Breath Trailer Logo" class="nav-logo-image">
+                Breath Trailer
+            </a>
             <ul class="nav-links">
                 <li><a href="#models">Models</a></li>
                 <li><a href="#video">Video</a></li>
@@ -1468,7 +1490,10 @@
     <footer class="footer" id="contact">
         <div class="footer-content">
             <div class="footer-brand">
-                <div class="footer-logo">Breath</div>
+                <div class="footer-logo">
+                    <img src="logobreath.avif" alt="Breath Trailer Logo" class="footer-logo-image">
+                    Breath Trailer
+                </div>
                 <p class="footer-description">
                     Engineered for adventure. Designed for comfort. Built for those who refuse to compromise.
                 </p>
