@@ -123,6 +123,8 @@
             width: 40px;
             height: 40px;
             object-fit: contain;
+            mix-blend-mode: normal;
+            filter: brightness(0) invert(1);
         }
 
         .nav-links {
@@ -507,6 +509,30 @@
             color: rgba(244, 244, 241, 0.8);
             letter-spacing: 0.05em;
             line-height: 1.6;
+        }
+
+        .video-sound-hint {
+            font-size: 0.75rem;
+            color: rgba(244, 244, 241, 0.5);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-sound-hint:hover {
+            opacity: 1;
+        }
+
+        .video-sound-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
         }
 
         /* Engineering Section */
@@ -1247,6 +1273,14 @@
             <div class="video-content">
                 <h2 class="video-title">Experience Breath Trailer</h2>
                 <p class="video-subtitle">See how we redefine adventure living with lightweight engineering and thoughtful design</p>
+                <div class="video-sound-hint">
+                    <svg class="video-sound-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                    </svg>
+                    <span>Click to enable sound</span>
+                </div>
             </div>
         </div>
     </section>
@@ -1496,12 +1530,33 @@
                     video.time(0).play();
                 });
 
-                // Optional: Unmute on click
+                // Unmute on click and hide hint
+                const soundHint = document.querySelector('.video-sound-hint');
                 videoSection.addEventListener('click', () => {
                     if (video.isMuted()) {
                         video.unmute();
+                        // Hide the sound hint after unmuting
+                        if (soundHint) {
+                            gsap.to(soundHint, {
+                                opacity: 0,
+                                duration: 0.5,
+                                ease: 'power2.out',
+                                onComplete: () => {
+                                    soundHint.style.display = 'none';
+                                }
+                            });
+                        }
                     } else {
                         video.mute();
+                        // Show the hint again if muted
+                        if (soundHint) {
+                            soundHint.style.display = 'flex';
+                            gsap.to(soundHint, {
+                                opacity: 0.7,
+                                duration: 0.5,
+                                ease: 'power2.out'
+                            });
+                        }
                     }
                 });
             }
