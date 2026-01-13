@@ -423,20 +423,52 @@
         .video-background .wistia_responsive_padding {
             padding: 0 !important;
             height: 100% !important;
+            position: relative !important;
         }
 
         .video-background .wistia_responsive_wrapper {
             height: 100% !important;
+            width: 100% !important;
         }
 
         .video-background .wistia_embed {
             height: 100% !important;
+            width: 100% !important;
         }
 
-        .video-background video {
+        .video-background .wistia_embed video {
             object-fit: cover !important;
             width: 100% !important;
             height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+        }
+
+        /* Force preview image (swatch) to cover full area before video loads */
+        .video-background .wistia_swatch {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .video-background .wistia_swatch img {
+            object-fit: cover !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Hide all Wistia controls and buttons */
+        .video-background .w-vulcan-v2-button,
+        .video-background .w-big-play-button,
+        .video-background .w-control-bar,
+        .video-background .w-playbar,
+        .video-background .w-bottom-bar {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
         }
         
         .video-overlay {
@@ -1421,9 +1453,24 @@
         window._wq = window._wq || [];
         _wq.push({
             id: "208j22fnl5",
+            options: {
+                autoPlay: true,
+                silentAutoPlay: 'allow',
+                muted: true,
+                controlsVisibleOnLoad: false,
+                playbar: false,
+                volumeControl: false,
+                fullscreenButton: false,
+                settingsControl: false,
+                smallPlayButton: false,
+                playButton: false
+            },
             onReady: function(video) {
                 const videoSection = document.getElementById('video-experience');
-                let hasPlayed = false;
+                
+                // Force immediate play
+                video.mute();
+                video.play();
 
                 // Create ScrollTrigger for video section
                 ScrollTrigger.create({
@@ -1432,13 +1479,9 @@
                     end: "bottom center",
                     onEnter: () => {
                         video.play();
-                        video.mute(); // Mute for autoplay compliance
-                        hasPlayed = true;
                     },
                     onEnterBack: () => {
-                        if (hasPlayed) {
-                            video.play();
-                        }
+                        video.play();
                     },
                     onLeave: () => {
                         video.pause();
@@ -1450,8 +1493,7 @@
 
                 // Set video to loop
                 video.bind('end', function() {
-                    video.time(0);
-                    video.play();
+                    video.time(0).play();
                 });
 
                 // Optional: Unmute on click
