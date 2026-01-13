@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breath Trailer | L'Aventure Légère</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <style>
+        :root {
+            --color-forest: #4d6e33;
+            --color-forest-dark: #3a5426;
+            --color-forest-light: #5d8340;
+            --color-charcoal: #1a1a1a;
+            --color-charcoal-light: #2a2a2a;
+            --color-cream: #f8f7f4;
+            --color-cream-dark: #e8e6e0;
+            --color-gold: #c9a962;
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #f8f7f4;
+            --color-text-muted: rgba(26, 26, 26, 0.4);
+
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'DM Sans', -apple-system, sans-serif;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--color-cream);
+            color: var(--color-text-dark);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid var(--color-forest);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s var(--ease-out-expo),
+                        opacity 0.15s ease,
+                        background 0.15s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        .cursor.hovering {
+            transform: translate(-50%, -50%) scale(2.5);
+            background: var(--color-forest);
+            border-color: transparent;
+        }
+
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--color-forest);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-text-light);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-text-light);
+            transition: width 0.4s var(--ease-out-expo);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-video-container {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.1) 40%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--color-text-light);
+            padding: 0 2rem;
+        }
+
+        .hero-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .hero-headline .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .hero-subheadline {
+            font-family: var(--font-sans);
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--color-text-light);
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transition: border-color 0.4s ease;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-forest);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease-out-expo);
+            z-index: -1;
+        }
+
+        .hero-cta:hover {
+            border-color: var(--color-forest);
+        }
+
+        .hero-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .hero-cta-arrow {
+            width: 20px;
+            height: 1px;
+            background: currentColor;
+            position: relative;
+            transition: width 0.4s var(--ease-out-expo);
+        }
+
+        .hero-cta-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            border-right: 1px solid currentColor;
+            border-top: 1px solid currentColor;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .hero-cta:hover .hero-cta-arrow {
+            width: 30px;
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--color-text-light);
+            opacity: 0;
+        }
+
+        .hero-scroll-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--color-text-light), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleY(1); opacity: 1; }
+            50% { transform: scaleY(0.5); opacity: 0.5; }
+        }
+
+        /* Manifesto Section */
+        .manifesto {
+            min-height: 200vh;
+            background: var(--color-cream);
+            position: relative;
+            padding: 15vh 0;
+        }
+
+        .manifesto-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10vw;
+        }
+
+        .manifesto-line {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 0.5em;
+            color: var(--color-text-muted);
+            transition: color 0.6s var(--ease-out-expo);
+        }
+
+        .manifesto-line.active {
+            color: var(--color-text-dark);
+        }
+
+        .manifesto-line.highlight {
+            color: var(--color-forest);
+        }
+
+        .manifesto-line .word {
+            display: inline-block;
+            transition: all 0.4s ease;
+        }
+
+        .manifesto-line .word.shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .manifesto-line .word.blur {
+            filter: blur(3px);
+            opacity: 0.6;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
+        .manifesto-divider {
+            position: absolute;
+            bottom: 10vh;
+            left: 10vw;
+            right: 10vw;
+            height: 1px;
+            background: var(--color-charcoal);
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        /* Engineering Section */
+        .engineering {
+            min-height: 300vh;
+            background: var(--color-charcoal);
+            position: relative;
+        }
+
+        .engineering-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .engineering-visual {
+            position: relative;
+            width: 70vw;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trailer-component {
+            position: absolute;
+            transition: transform 1s var(--ease-out-expo), opacity 0.6s ease;
+        }
+
+        .trailer-chassis {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .trailer-body {
+            width: 100%;
+            max-width: 580px;
+            transform: translateY(-20px);
+        }
+
+        .trailer-interior {
+            width: 80%;
+            max-width: 400px;
+            transform: translateY(-40px);
+        }
+
+        .trailer-roof {
+            width: 100%;
+            max-width: 560px;
+            transform: translateY(-60px);
+        }
+
+        /* Placeholder SVG styling */
+        .trailer-component svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .engineering-hotspot {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hotspot-dot {
+            width: 12px;
+            height: 12px;
+            border: 1.5px solid var(--color-forest-light);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .hotspot-dot::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: var(--color-forest);
+            border-radius: 50%;
+        }
+
+        .hotspot-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, var(--color-forest-light), transparent);
+        }
+
+        .hotspot-label {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            white-space: nowrap;
+        }
+
+        .engineering-stats {
+            position: absolute;
+            bottom: 15vh;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8vw;
+        }
+
+        .stat-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--color-forest);
+            line-height: 1;
+        }
+
+        .stat-unit {
+            font-size: 0.5em;
+            vertical-align: super;
+        }
+
+        .stat-label {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 0.75rem;
+        }
+
+        .engineering-headline {
+            position: absolute;
+            top: 12vh;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        .engineering-headline h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: var(--color-text-light);
+            letter-spacing: 0.02em;
+            opacity: 0;
+        }
+
+        .engineering-headline p {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 1rem;
+            opacity: 0;
+        }
+
+        /* Lifestyle Section */
+        .lifestyle {
+            background: var(--color-cream);
+            padding: 15vh 5vw;
+            position: relative;
+        }
+
+        .lifestyle-header {
+            text-align: center;
+            margin-bottom: 10vh;
+        }
+
+        .lifestyle-header h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .lifestyle-header h2 span {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+
+        .lifestyle-header p {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            letter-spacing: 0.05em;
+            max-width: 500px;
+            margin: 0 auto;
+            opacity: 0;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(4, minmax(200px, auto));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .bento-item {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .bento-item-1 {
+            grid-column: 1 / 8;
+            grid-row: 1 / 3;
+        }
+
+        .bento-item-2 {
+            grid-column: 8 / 13;
+            grid-row: 1 / 2;
+        }
+
+        .bento-item-3 {
+            grid-column: 8 / 13;
+            grid-row: 2 / 3;
+            background: var(--color-charcoal);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bento-item-4 {
+            grid-column: 1 / 5;
+            grid-row: 3 / 5;
+        }
+
+        .bento-item-5 {
+            grid-column: 5 / 9;
+            grid-row: 3 / 4;
+            background: var(--color-forest);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bento-item-6 {
+            grid-column: 9 / 13;
+            grid-row: 3 / 5;
+        }
+
+        .bento-item-7 {
+            grid-column: 5 / 9;
+            grid-row: 4 / 5;
+        }
+
+        .bento-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease-out-expo);
+        }
+
+        .bento-item:hover .bento-image {
+            transform: scale(1.05);
+        }
+
+        .bento-testimonial {
+            color: var(--color-text-light);
+        }
+
+        .bento-testimonial-quote {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .bento-testimonial-author {
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .bento-stat {
+            color: var(--color-text-light);
+            text-align: center;
+        }
+
+        .bento-stat-number {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .bento-stat-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .press-logos {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 8vh;
+            flex-wrap: wrap;
+        }
+
+        .press-logo {
+            opacity: 0.4;
+            filter: grayscale(100%);
+            transition: opacity 0.4s ease, filter 0.4s ease;
+            height: 30px;
+        }
+
+        .press-logo:hover {
+            opacity: 0.8;
+            filter: grayscale(0%);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--color-charcoal);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10vh 5vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-bg-text {
+            position: absolute;
+            font-family: var(--font-serif);
+            font-size: 30vw;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .cta-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 300;
+            color: var(--color-text-light);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .cta-headline span {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+
+        .cta-subheadline {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.08em;
+            margin-bottom: 4rem;
+            opacity: 0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1.5rem 3rem;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .cta-btn-primary {
+            background: var(--color-forest);
+            color: var(--color-text-light);
+            border: 1px solid var(--color-forest);
+        }
+
+        .cta-btn-primary:hover {
+            background: var(--color-forest-light);
+            border-color: var(--color-forest-light);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: var(--color-text-light);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-btn-secondary:hover {
+            border-color: var(--color-text-light);
+        }
+
+        .cta-btn-icon {
+            width: 8px;
+            height: 8px;
+            border-right: 1.5px solid currentColor;
+            border-top: 1.5px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .cta-btn:hover .cta-btn-icon {
+            transform: rotate(45deg) translate(3px, -3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-charcoal);
+            padding: 4rem 5vw;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--color-text-light);
+            text-decoration: none;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-text-light);
+        }
+
+        .footer-made {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .footer-made span {
+            color: var(--color-forest);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .bento-item-1 { grid-column: 1 / 7; grid-row: 1 / 2; min-height: 300px; }
+            .bento-item-2 { grid-column: 1 / 4; grid-row: 2 / 3; min-height: 250px; }
+            .bento-item-3 { grid-column: 4 / 7; grid-row: 2 / 3; }
+            .bento-item-4 { grid-column: 1 / 4; grid-row: 3 / 4; min-height: 300px; }
+            .bento-item-5 { grid-column: 4 / 7; grid-row: 3 / 4; }
+            .bento-item-6 { grid-column: 1 / 7; grid-row: 4 / 5; min-height: 300px; }
+            .bento-item-7 { grid-column: 1 / 7; grid-row: 5 / 6; min-height: 250px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+
+            .cursor, .cursor-dot { display: none; }
+
+            .manifesto-container { padding: 0 5vw; }
+
+            .engineering-stats {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-item-1, .bento-item-2, .bento-item-3,
+            .bento-item-4, .bento-item-5, .bento-item-6,
+            .bento-item-7 {
+                grid-column: 1;
+                grid-row: auto;
+            }
+        }
+
+        /* Loading screen */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--color-charcoal);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-text {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--color-text-light);
+            overflow: hidden;
+        }
+
+        .loader-text span {
+            display: inline-block;
+        }
+
+        /* Grain overlay */
+        .grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="loader-text">
+            <span>B</span><span>r</span><span>e</span><span>a</span><span>t</span><span>h</span>
+        </div>
+    </div>
+
+    <!-- Grain Overlay -->
+    <div class="grain"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">Breath</a>
+        <ul class="nav-links">
+            <li><a href="#" data-cursor-hover>Modèles</a></li>
+            <li><a href="#" data-cursor-hover>Configurateur</a></li>
+            <li><a href="#" data-cursor-hover>Notre Histoire</a></li>
+            <li><a href="#" data-cursor-hover>Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-video-container">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-car-traveling-on-an-asphalt-road-in-the-middle-of-a-26386-large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-headline">L'Aventure Légère</h1>
+            <p class="hero-subheadline">Conçu pour l'exploration. Pensé pour le confort.</p>
+            <a href="#" class="hero-cta magnetic" data-cursor-hover>
+                <span>Configurer le vôtre</span>
+                <span class="hero-cta-arrow"></span>
+            </a>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <span class="hero-scroll-text">Découvrir</span>
+            <span class="hero-scroll-line"></span>
+        </div>
+    </section>
+
+    <!-- Manifesto Section -->
+    <section class="manifesto">
+        <div class="manifesto-container">
+            <p class="manifesto-line" data-line="1">
+                La plupart des caravanes sont conçues pour tout le monde...
+            </p>
+            <p class="manifesto-line" data-line="2">
+                <span class="word" data-effect="shake">Masses encombrantes.</span>
+                <span class="word" data-effect="blur">Isolation médiocre.</span>
+            </p>
+            <p class="manifesto-line" data-line="3">
+                Des compromis à chaque tournant.
+            </p>
+            <p class="manifesto-line highlight" data-line="4">
+                Sauf pour ceux qui refusent l'ordinaire.
+            </p>
+        </div>
+        <div class="manifesto-divider"></div>
+    </section>
+
+    <!-- Engineering Section -->
+    <section class="engineering">
+        <div class="engineering-sticky">
+            <div class="engineering-headline">
+                <h2>L'Art de l'Ingénierie</h2>
+                <p>Chaque composant, une intention</p>
+            </div>
+
+            <div class="engineering-visual">
+                <!-- Trailer Components (SVG placeholders) -->
+                <div class="trailer-component trailer-chassis" data-component="chassis">
+                    <svg viewBox="0 0 600 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="50" y="80" width="500" height="40" rx="5" fill="#3a3a3a"/>
+                        <circle cx="150" cy="130" r="30" fill="#2a2a2a" stroke="#4d6e33" stroke-width="2"/>
+                        <circle cx="450" cy="130" r="30" fill="#2a2a2a" stroke="#4d6e33" stroke-width="2"/>
+                        <rect x="20" y="85" width="80" height="30" rx="3" fill="#4d6e33"/>
+                    </svg>
+                </div>
+
+                <div class="trailer-component trailer-body" data-component="body">
+                    <svg viewBox="0 0 580 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M30 180 L30 50 Q30 30 50 30 L530 30 Q550 30 550 50 L550 180 Z" fill="#e8e6e0" stroke="#ccc" stroke-width="2"/>
+                        <rect x="80" y="60" width="120" height="80" rx="5" fill="#87ceeb" opacity="0.5"/>
+                        <rect x="380" y="60" width="120" height="80" rx="5" fill="#87ceeb" opacity="0.5"/>
+                        <rect x="250" y="100" width="80" height="80" rx="3" fill="#4a4a4a"/>
+                    </svg>
+                </div>
+
+                <div class="trailer-component trailer-interior" data-component="interior">
+                    <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="20" width="100" height="110" rx="5" fill="#8b7355"/>
+                        <rect x="140" y="50" width="120" height="80" rx="5" fill="#6b8e6b"/>
+                        <rect x="280" y="20" width="100" height="60" rx="5" fill="#4d6e33"/>
+                        <circle cx="330" cy="100" r="25" fill="#708090"/>
+                    </svg>
+                </div>
+
+                <div class="trailer-component trailer-roof" data-component="roof">
+                    <svg viewBox="0 0 560 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 60 L20 20 Q20 10 30 10 L530 10 Q540 10 540 20 L540 60" fill="#d4d4d4" stroke="#bbb" stroke-width="2"/>
+                        <rect x="200" y="5" width="160" height="10" rx="2" fill="#4d6e33"/>
+                    </svg>
+                </div>
+
+                <!-- Hotspots -->
+                <div class="engineering-hotspot" data-hotspot="1" style="top: 20%; left: 10%;">
+                    <span class="hotspot-dot"></span>
+                    <span class="hotspot-line"></span>
+                    <span class="hotspot-label">Toit solaire intégré</span>
+                </div>
+
+                <div class="engineering-hotspot" data-hotspot="2" style="top: 40%; right: 5%;">
+                    <span class="hotspot-dot"></span>
+                    <span class="hotspot-line"></span>
+                    <span class="hotspot-label">Isolation thermique 4 saisons</span>
+                </div>
+
+                <div class="engineering-hotspot" data-hotspot="3" style="bottom: 30%; left: 15%;">
+                    <span class="hotspot-dot"></span>
+                    <span class="hotspot-line"></span>
+                    <span class="hotspot-label">Châssis aluminium aéronautique</span>
+                </div>
+            </div>
+
+            <div class="engineering-stats">
+                <div class="stat-item">
+                    <div class="stat-number">&lt;900<span class="stat-unit">kg</span></div>
+                    <div class="stat-label">Poids total</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">0.28<span class="stat-unit">Cd</span></div>
+                    <div class="stat-label">Coefficient aérodynamique</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15<span class="stat-unit">ans</span></div>
+                    <div class="stat-label">Garantie structure</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lifestyle Section -->
+    <section class="lifestyle">
+        <div class="lifestyle-header">
+            <h2><span>L'Appel du Voyage</span></h2>
+            <p>Rejoignez une communauté d'explorateurs qui ont choisi l'excellence sans compromis.</p>
+        </div>
+
+        <div class="bento-grid">
+            <div class="bento-item bento-item-1">
+                <img class="bento-image" src="https://images.unsplash.com/photo-1533873984035-25970ab07461?w=1200" alt="Aventure en pleine nature">
+            </div>
+
+            <div class="bento-item bento-item-2">
+                <img class="bento-image" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800" alt="Camping au coucher de soleil">
+            </div>
+
+            <div class="bento-item bento-item-3">
+                <div class="bento-testimonial">
+                    <p class="bento-testimonial-quote">"Le Breath Trailer a transformé notre façon de voyager. La légèreté, le design... C'est exactement ce que nous recherchions."</p>
+                    <p class="bento-testimonial-author">— Marie & Thomas, Victoria</p>
+                </div>
+            </div>
+
+            <div class="bento-item bento-item-4">
+                <img class="bento-image" src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800" alt="Route panoramique">
+            </div>
+
+            <div class="bento-item bento-item-5">
+                <div class="bento-stat">
+                    <div class="bento-stat-number">2,500+</div>
+                    <div class="bento-stat-label">Aventuriers équipés</div>
+                </div>
+            </div>
+
+            <div class="bento-item bento-item-6">
+                <img class="bento-image" src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=1200" alt="Intérieur confortable">
+            </div>
+
+            <div class="bento-item bento-item-7">
+                <img class="bento-image" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800" alt="Sur la route">
+            </div>
+        </div>
+
+        <div class="press-logos">
+            <svg class="press-logo" viewBox="0 0 120 30" fill="currentColor">
+                <text x="0" y="22" font-family="var(--font-sans)" font-size="14" font-weight="500">RV DAILY</text>
+            </svg>
+            <svg class="press-logo" viewBox="0 0 120 30" fill="currentColor">
+                <text x="0" y="22" font-family="var(--font-sans)" font-size="14" font-weight="500">CARAVAN</text>
+            </svg>
+            <svg class="press-logo" viewBox="0 0 120 30" fill="currentColor">
+                <text x="0" y="22" font-family="var(--font-sans)" font-size="14" font-weight="500">TRAVEL+</text>
+            </svg>
+            <svg class="press-logo" viewBox="0 0 150 30" fill="currentColor">
+                <text x="0" y="22" font-family="var(--font-sans)" font-size="14" font-weight="500">OUTDOOR LIFE</text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-bg-text">BREATH</div>
+
+        <div class="cta-content">
+            <h2 class="cta-headline">
+                <span>Prêt à quitter</span><br>
+                <span>la masse ?</span>
+            </h2>
+            <p class="cta-subheadline">Votre aventure sur mesure commence ici.</p>
+
+            <div class="cta-buttons">
+                <a href="#" class="cta-btn cta-btn-primary magnetic" data-cursor-hover>
+                    <span>Je crée le mien</span>
+                    <span class="cta-btn-icon"></span>
+                </a>
+                <a href="#" class="cta-btn cta-btn-secondary magnetic" data-cursor-hover>
+                    <span>Parler à un expert</span>
+                    <span class="cta-btn-icon"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="#" class="footer-logo">Breath</a>
+
+            <ul class="footer-links">
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Confidentialité</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Presse</a></li>
+            </ul>
+
+            <p class="footer-made">Fabriqué en <span>Australie</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lenis smooth scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP ScrollTrigger setup
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Sync Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        const hoverElements = document.querySelectorAll('[data-cursor-hover]');
+
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+
+        // Magnetic Buttons
+        const magneticBtns = document.querySelectorAll('.magnetic');
+
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                gsap.to(btn, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.4,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+
+        // Loading Animation
+        const loader = document.querySelector('.loader');
+        const loaderChars = loader.querySelectorAll('.loader-text span');
+
+        const loaderTl = gsap.timeline({
+            onComplete: () => {
+                gsap.to(loader, {
+                    yPercent: -100,
+                    duration: 1,
+                    ease: 'power4.inOut',
+                    onComplete: () => {
+                        loader.style.display = 'none';
+                        initHeroAnimations();
+                    }
+                });
+            }
+        });
+
+        loaderTl.from(loaderChars, {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.05,
+            ease: 'power3.out'
+        })
+        .to(loaderChars, {
+            y: -50,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.03,
+            ease: 'power3.in'
+        }, '+=0.5');
+
+        // Hero Animations
+        function initHeroAnimations() {
+            const headline = document.querySelector('.hero-headline');
+            const text = headline.textContent;
+            headline.innerHTML = '';
+
+            // Split text into characters
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                headline.appendChild(span);
+            });
+
+            const chars = headline.querySelectorAll('.char');
+            const subheadline = document.querySelector('.hero-subheadline');
+            const cta = document.querySelector('.hero-cta');
+            const scrollIndicator = document.querySelector('.hero-scroll-indicator');
+
+            const heroTl = gsap.timeline({ delay: 0.3 });
+
+            heroTl.to(chars, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.03,
+                ease: 'power3.out'
+            })
+            .to(subheadline, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            }, '-=0.5')
+            .to(cta, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            }, '-=0.5')
+            .to(scrollIndicator, {
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power3.out'
+            }, '-=0.3');
+
+            // Hero scroll effect
+            gsap.to('.hero-content', {
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                scale: 1.1,
+                opacity: 0,
+                y: -50
+            });
+
+            gsap.to('.hero-overlay', {
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                opacity: 0.8
+            });
+        }
+
+        // Manifesto Section Animations
+        const manifestoLines = document.querySelectorAll('.manifesto-line');
+
+        manifestoLines.forEach((line, index) => {
+            ScrollTrigger.create({
+                trigger: '.manifesto',
+                start: () => `${index * 25}% top`,
+                end: () => `${(index + 1) * 25}% top`,
+                onEnter: () => {
+                    manifestoLines.forEach(l => l.classList.remove('active'));
+                    line.classList.add('active');
+
+                    // Special effects for line 2
+                    if (index === 1) {
+                        const words = line.querySelectorAll('.word');
+                        words.forEach(word => {
+                            const effect = word.dataset.effect;
+                            if (effect) word.classList.add(effect);
+                        });
+                    }
+                },
+                onLeaveBack: () => {
+                    if (index > 0) {
+                        manifestoLines.forEach(l => l.classList.remove('active'));
+                        manifestoLines[index - 1].classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // Manifesto divider animation
+        gsap.to('.manifesto-divider', {
+            scrollTrigger: {
+                trigger: '.manifesto',
+                start: '80% center',
+                end: '90% center',
+                scrub: 1
+            },
+            scaleX: 1
+        });
+
+        // Engineering Section - Exploded View
+        const engineeringSection = document.querySelector('.engineering');
+
+        // Initial state
+        gsap.set('.trailer-chassis', { y: 0 });
+        gsap.set('.trailer-body', { y: 0 });
+        gsap.set('.trailer-interior', { y: 0, opacity: 0 });
+        gsap.set('.trailer-roof', { y: 0 });
+
+        // Exploded view animation
+        const explodeTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '.engineering',
+                start: 'top top',
+                end: '60% top',
+                scrub: 1,
+                pin: false
+            }
+        });
+
+        explodeTl
+            .to('.trailer-roof', { y: -120, duration: 1 }, 0)
+            .to('.trailer-interior', { y: -40, opacity: 1, duration: 1 }, 0)
+            .to('.trailer-body', { y: 40, duration: 1 }, 0)
+            .to('.trailer-chassis', { y: 120, duration: 1 }, 0);
+
+        // Engineering headline
+        gsap.to('.engineering-headline h2', {
+            scrollTrigger: {
+                trigger: '.engineering',
+                start: 'top 80%',
+                end: 'top 40%',
+                scrub: 1
+            },
+            opacity: 1,
+            y: 0
+        });
+
+        gsap.to('.engineering-headline p', {
+            scrollTrigger: {
+                trigger: '.engineering',
+                start: 'top 70%',
+                end: 'top 30%',
+                scrub: 1
+            },
+            opacity: 1,
+            y: 0
+        });
+
+        // Hotspots animation
+        const hotspots = document.querySelectorAll('.engineering-hotspot');
+        hotspots.forEach((hotspot, i) => {
+            gsap.to(hotspot, {
+                scrollTrigger: {
+                    trigger: '.engineering',
+                    start: `${40 + i * 10}% top`,
+                    end: `${50 + i * 10}% top`,
+                    scrub: 1
+                },
+                opacity: 1,
+                x: 0
+            });
+        });
+
+        // Stats animation
+        const statItems = document.querySelectorAll('.stat-item');
+        statItems.forEach((stat, i) => {
+            gsap.to(stat, {
+                scrollTrigger: {
+                    trigger: '.engineering',
+                    start: `${60 + i * 5}% top`,
+                    end: `${70 + i * 5}% top`,
+                    scrub: 1
+                },
+                opacity: 1,
+                y: 0
+            });
+        });
+
+        // Lifestyle Section Animations
+        gsap.to('.lifestyle-header h2 span', {
+            scrollTrigger: {
+                trigger: '.lifestyle',
+                start: 'top 80%',
+                end: 'top 50%',
+                scrub: 1
+            },
+            y: 0
+        });
+
+        gsap.to('.lifestyle-header p', {
+            scrollTrigger: {
+                trigger: '.lifestyle',
+                start: 'top 70%',
+                end: 'top 40%',
+                scrub: 1
+            },
+            opacity: 1
+        });
+
+        // Bento grid items
+        const bentoItems = document.querySelectorAll('.bento-item');
+        bentoItems.forEach((item, i) => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                },
+                opacity: 1,
+                y: 0
+            });
+        });
+
+        // Parallax on bento images
+        document.querySelectorAll('.bento-image').forEach(img => {
+            gsap.to(img, {
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                y: -30
+            });
+        });
+
+        // CTA Section Animations
+        gsap.to('.cta-headline span', {
+            scrollTrigger: {
+                trigger: '.cta-section',
+                start: 'top 80%',
+                end: 'top 40%',
+                scrub: 1
+            },
+            y: 0,
+            stagger: 0.1
+        });
+
+        gsap.to('.cta-subheadline', {
+            scrollTrigger: {
+                trigger: '.cta-section',
+                start: 'top 60%',
+                end: 'top 30%',
+                scrub: 1
+            },
+            opacity: 1
+        });
+
+        gsap.to('.cta-btn', {
+            scrollTrigger: {
+                trigger: '.cta-section',
+                start: 'top 50%',
+                end: 'top 20%',
+                scrub: 1
+            },
+            opacity: 1,
+            y: 0,
+            stagger: 0.1
+        });
+
+        // Background text parallax
+        gsap.to('.cta-bg-text', {
+            scrollTrigger: {
+                trigger: '.cta-section',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            },
+            x: -200
+        });
+    </script>
+</body>
+</html>
