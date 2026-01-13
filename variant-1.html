@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breath Trailer | Technical Blueprint</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            --color-forest: #4A5D3D;
+            --color-forest-dark: #3d4e33;
+            --color-sand: #F4F4F1;
+            --color-stone: #E0E0DA;
+            --color-charcoal: #1A1A1A;
+            --color-tech-blue: #2563eb;
+            
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--color-sand);
+            color: var(--color-charcoal);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(244,244,241,0.98), transparent);
+        }
+        
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-charcoal);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--color-charcoal);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-forest);
+        }
+        
+        /* Hero Section - Technical Blueprint */
+        .hero-blueprint {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5vw;
+            overflow: hidden;
+        }
+        
+        /* Grid Background */
+        .blueprint-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--color-stone) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-stone) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+        
+        .hero-content-blueprint {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1400px;
+            width: 100%;
+        }
+        
+        .hero-title-blueprint {
+            font-family: var(--font-sans);
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            color: var(--color-charcoal);
+        }
+        
+        .hero-subtitle-blueprint {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-forest);
+            margin-bottom: 4rem;
+        }
+        
+        /* Trailer Technical Diagram */
+        .trailer-diagram {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+        
+        .trailer-svg-container {
+            position: relative;
+        }
+        
+        .dimension-line {
+            stroke: var(--color-forest);
+            stroke-width: 1;
+            stroke-dasharray: 4 4;
+            opacity: 0;
+        }
+        
+        .dimension-text {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            fill: var(--color-forest);
+            opacity: 0;
+        }
+        
+        /* Certification Section */
+        .certification {
+            background: white;
+            padding: 8rem 5vw;
+            border-top: 1px solid var(--color-stone);
+            border-bottom: 1px solid var(--color-stone);
+        }
+        
+        .cert-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .cert-header h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--color-charcoal);
+            margin-bottom: 1rem;
+        }
+        
+        .cert-header p {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-forest);
+        }
+        
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .cert-item {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--color-stone);
+            background: var(--color-sand);
+            transition: all 0.4s var(--ease-out-expo);
+        }
+        
+        .cert-item:hover {
+            border-color: var(--color-forest);
+            transform: translateY(-4px);
+        }
+        
+        .cert-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            border: 2px solid var(--color-forest);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            color: var(--color-forest);
+        }
+        
+        .cert-title {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-charcoal);
+        }
+        
+        .cert-detail {
+            font-size: 0.85rem;
+            color: rgba(26, 26, 26, 0.6);
+            line-height: 1.6;
+        }
+        
+        /* Technical Specs Section */
+        .tech-specs {
+            padding: 10rem 5vw;
+            background: var(--color-sand);
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .spec-item {
+            position: relative;
+            padding: 2rem 0;
+            border-top: 2px solid var(--color-forest);
+        }
+        
+        .spec-number {
+            font-family: var(--font-mono);
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 600;
+            line-height: 1;
+            color: var(--color-forest);
+            margin-bottom: 0.5rem;
+        }
+        
+        .spec-unit {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+        
+        .spec-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(26, 26, 26, 0.6);
+            margin-top: 1rem;
+        }
+        
+        .spec-detail {
+            font-size: 0.9rem;
+            color: rgba(26, 26, 26, 0.5);
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        /* Component X-Ray Section */
+        .xray-section {
+            background: white;
+            padding: 10rem 5vw;
+            border-top: 1px solid var(--color-stone);
+        }
+        
+        .xray-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .xray-header h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--color-charcoal);
+        }
+        
+        .xray-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .xray-item {
+            position: relative;
+            padding: 3rem;
+            border: 1px solid var(--color-stone);
+            background: var(--color-sand);
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+        
+        .xray-item:hover {
+            border-color: var(--color-forest);
+            background: white;
+        }
+        
+        .xray-item:hover .xray-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .xray-component-name {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-forest);
+            margin-bottom: 1rem;
+        }
+        
+        .xray-component-title {
+            font-family: var(--font-sans);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-charcoal);
+        }
+        
+        .xray-tooltip {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-stone);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.4s var(--ease-out-expo);
+        }
+        
+        .xray-spec-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: rgba(26, 26, 26, 0.7);
+        }
+        
+        .xray-spec-value {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            color: var(--color-charcoal);
+        }
+        
+        /* Instagram Grid - Military Style */
+        .instagram-section {
+            padding: 10rem 5vw;
+            background: var(--color-sand);
+        }
+        
+        .insta-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .insta-header h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--color-charcoal);
+            margin-bottom: 1rem;
+        }
+        
+        .insta-header p {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-forest);
+        }
+        
+        .insta-grid-military {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--color-stone);
+        }
+        
+        .insta-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: var(--color-stone);
+            position: relative;
+        }
+        
+        .insta-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+        
+        .insta-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .insta-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(74, 93, 61, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .insta-item:hover .insta-overlay {
+            opacity: 1;
+        }
+        
+        .insta-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: white;
+        }
+        
+        /* CTA Section */
+        .cta-blueprint {
+            background: var(--color-forest);
+            padding: 10rem 5vw;
+            text-align: center;
+            color: var(--color-sand);
+        }
+        
+        .cta-blueprint h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-blueprint p {
+            font-size: 1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+        }
+        
+        .cta-btn-blueprint {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: var(--color-sand);
+            color: var(--color-forest);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid var(--color-sand);
+            transition: all 0.4s var(--ease-out-expo);
+        }
+        
+        .cta-btn-blueprint:hover {
+            background: transparent;
+            color: var(--color-sand);
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--color-charcoal);
+            padding: 4rem 5vw;
+            color: var(--color-sand);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            font-size: 0.8rem;
+            color: rgba(244, 244, 241, 0.6);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-sand);
+        }
+        
+        .footer-copy {
+            font-size: 0.75rem;
+            color: rgba(244, 244, 241, 0.4);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .specs-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .xray-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .insta-grid-military {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index-original.html" class="nav-logo">Breath</a>
+        <ul class="nav-links">
+            <li><a href="index-original.html">Original</a></li>
+            <li><a href="variant-1.html">Blueprint</a></li>
+            <li><a href="variant-2.html">Wilderness</a></li>
+            <li><a href="#specs">Specs</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section with Technical Blueprint -->
+    <section class="hero-blueprint">
+        <div class="blueprint-grid"></div>
+        
+        <div class="hero-content-blueprint">
+            <p class="hero-subtitle-blueprint">Technical Specifications</p>
+            <h1 class="hero-title-blueprint">BREATH<br>TRAILER</h1>
+            
+            <div class="trailer-diagram">
+                <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" id="trailer-technical">
+                    <!-- Main Trailer Body -->
+                    <path d="M100 250 L100 150 Q100 140 110 140 L1090 140 Q1100 140 1100 150 L1100 250 Z" 
+                          fill="none" stroke="#4A5D3D" stroke-width="2" class="trailer-outline"/>
+                    
+                    <!-- Wheels -->
+                    <circle cx="250" cy="280" r="35" fill="none" stroke="#4A5D3D" stroke-width="2" class="trailer-outline"/>
+                    <circle cx="950" cy="280" r="35" fill="none" stroke="#4A5D3D" stroke-width="2" class="trailer-outline"/>
+                    
+                    <!-- Hitch -->
+                    <rect x="30" y="190" width="80" height="25" rx="3" fill="none" stroke="#4A5D3D" stroke-width="2" class="trailer-outline"/>
+                    
+                    <!-- Windows -->
+                    <rect x="200" y="160" width="150" height="70" rx="5" fill="none" stroke="#4A5D3D" stroke-width="1.5" class="trailer-outline"/>
+                    <rect x="850" y="160" width="150" height="70" rx="5" fill="none" stroke="#4A5D3D" stroke-width="1.5" class="trailer-outline"/>
+                    
+                    <!-- Door -->
+                    <rect x="500" y="170" width="100" height="80" rx="3" fill="none" stroke="#4A5D3D" stroke-width="1.5" class="trailer-outline"/>
+                    
+                    <!-- Roof Solar Panel -->
+                    <rect x="400" y="130" width="400" height="8" rx="2" fill="none" stroke="#4A5D3D" stroke-width="1.5" class="trailer-outline"/>
+                    
+                    <!-- Dimension Lines -->
+                    <!-- Length -->
+                    <line x1="100" y1="330" x2="1100" y2="330" class="dimension-line" stroke-dasharray="5 5"/>
+                    <line x1="100" y1="320" x2="100" y2="340" stroke="#4A5D3D" stroke-width="1"/>
+                    <line x1="1100" y1="320" x2="1100" y2="340" stroke="#4A5D3D" stroke-width="1"/>
+                    <text x="600" y="355" text-anchor="middle" class="dimension-text">5.8m OVERALL LENGTH</text>
+                    
+                    <!-- Height -->
+                    <line x1="1150" y1="140" x2="1150" y2="250" class="dimension-line" stroke-dasharray="5 5"/>
+                    <line x1="1140" y1="140" x2="1160" y2="140" stroke="#4A5D3D" stroke-width="1"/>
+                    <line x1="1140" y1="250" x2="1160" y2="250" stroke="#4A5D3D" stroke-width="1"/>
+                    <text x="1180" y="200" class="dimension-text">2.1m</text>
+                    
+                    <!-- Width annotation -->
+                    <text x="600" y="120" text-anchor="middle" class="dimension-text">2.0m WIDTH</text>
+                    
+                    <!-- Component Labels -->
+                    <text x="470" y="125" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#4A5D3D" opacity="0.7">SOLAR ARRAY</text>
+                    <text x="275" y="175" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#4A5D3D" opacity="0.7">WINDOW</text>
+                    <text x="550" y="215" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#4A5D3D" opacity="0.7">ENTRY</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certification & Excellence Section -->
+    <section class="certification">
+        <div class="cert-header">
+            <h2>Certification & Excellence</h2>
+            <p>Engineering Standards & Quality Assurance</p>
+        </div>
+        
+        <div class="cert-grid">
+            <div class="cert-item">
+                <div class="cert-icon">✓</div>
+                <h3 class="cert-title">ISO 9001:2015</h3>
+                <p class="cert-detail">Quality management systems certification ensuring consistent manufacturing standards</p>
+            </div>
+            
+            <div class="cert-item">
+                <div class="cert-icon">★</div>
+                <h3 class="cert-title">15-Year Warranty</h3>
+                <p class="cert-detail">Comprehensive structural warranty backed by aerospace-grade materials</p>
+            </div>
+            
+            <div class="cert-item">
+                <div class="cert-icon">◆</div>
+                <h3 class="cert-title">ADR Compliant</h3>
+                <p class="cert-detail">Australian Design Rules certified for road safety and compliance</p>
+            </div>
+            
+            <div class="cert-item">
+                <div class="cert-icon">▲</div>
+                <h3 class="cert-title">4-Season Rated</h3>
+                <p class="cert-detail">-15°C to +45°C operational range with R-value 6.5 insulation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="tech-specs" id="specs">
+        <div class="specs-grid">
+            <div class="spec-item">
+                <div class="spec-number" data-target="890">0<span class="spec-unit">kg</span></div>
+                <div class="spec-label">Total Mass</div>
+                <p class="spec-detail">Aerospace aluminum monocoque chassis with composite panels</p>
+            </div>
+            
+            <div class="spec-item">
+                <div class="spec-number">0.<span data-target="28">00</span><span class="spec-unit">Cd</span></div>
+                <div class="spec-label">Drag Coefficient</div>
+                <p class="spec-detail">Wind tunnel optimized teardrop profile for minimal air resistance</p>
+            </div>
+            
+            <div class="spec-item">
+                <div class="spec-number" data-target="800">0<span class="spec-unit">W</span></div>
+                <div class="spec-label">Solar Capacity</div>
+                <p class="spec-detail">Monocrystalline panels with 22% efficiency rating</p>
+            </div>
+            
+            <div class="spec-item">
+                <div class="spec-number" data-target="200">0<span class="spec-unit">Ah</span></div>
+                <div class="spec-label">Battery Storage</div>
+                <p class="spec-detail">LiFePO4 lithium system with 5000+ cycle lifespan</p>
+            </div>
+            
+            <div class="spec-item">
+                <div class="spec-number">R<span data-target="6.5">0.0</span></div>
+                <div class="spec-label">Insulation Value</div>
+                <p class="spec-detail">Multi-layer thermal barrier with vapor management</p>
+            </div>
+            
+            <div class="spec-item">
+                <div class="spec-number" data-target="15">0<span class="spec-unit">yrs</span></div>
+                <div class="spec-label">Warranty Period</div>
+                <p class="spec-detail">Comprehensive structural and systems coverage</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Component X-Ray Section -->
+    <section class="xray-section">
+        <div class="xray-header">
+            <h2>Engineering Deep Dive</h2>
+        </div>
+        
+        <div class="xray-grid">
+            <div class="xray-item">
+                <p class="xray-component-name">Component 01</p>
+                <h3 class="xray-component-title">Aerospace Chassis</h3>
+                <div class="xray-tooltip">
+                    <div class="xray-spec-line">
+                        <span>Material</span>
+                        <span class="xray-spec-value">6061-T6 Aluminum</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Tensile Strength</span>
+                        <span class="xray-spec-value">310 MPa</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Weight Reduction</span>
+                        <span class="xray-spec-value">-40% vs Steel</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Corrosion Resistance</span>
+                        <span class="xray-spec-value">Marine Grade</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="xray-item">
+                <p class="xray-component-name">Component 02</p>
+                <h3 class="xray-component-title">Composite Shell</h3>
+                <div class="xray-tooltip">
+                    <div class="xray-spec-line">
+                        <span>Core Material</span>
+                        <span class="xray-spec-value">Honeycomb Composite</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Skin Material</span>
+                        <span class="xray-spec-value">Fiberglass Laminate</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Thickness</span>
+                        <span class="xray-spec-value">38mm Insulated</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Thermal Break</span>
+                        <span class="xray-spec-value">Complete</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="xray-item">
+                <p class="xray-component-name">Component 03</p>
+                <h3 class="xray-component-title">Independent Suspension</h3>
+                <div class="xray-tooltip">
+                    <div class="xray-spec-line">
+                        <span>Type</span>
+                        <span class="xray-spec-value">Torsion Flex</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Travel</span>
+                        <span class="xray-spec-value">150mm Per Wheel</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Damping</span>
+                        <span class="xray-spec-value">Gas Shock Absorbers</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Ground Clearance</span>
+                        <span class="xray-spec-value">300mm</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="xray-item">
+                <p class="xray-component-name">Component 04</p>
+                <h3 class="xray-component-title">Solar Integration</h3>
+                <div class="xray-tooltip">
+                    <div class="xray-spec-line">
+                        <span>Panel Type</span>
+                        <span class="xray-spec-value">Monocrystalline</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Efficiency</span>
+                        <span class="xray-spec-value">22.1%</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>MPPT Controller</span>
+                        <span class="xray-spec-value">40A Smart</span>
+                    </div>
+                    <div class="xray-spec-line">
+                        <span>Daily Generation</span>
+                        <span class="xray-spec-value">4.8 kWh Average</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Manufacturing Grid -->
+    <section class="instagram-section">
+        <div class="insta-header">
+            <h2>Manufacturing Excellence</h2>
+            <p>Precision. Testing. Quality Control.</p>
+        </div>
+        
+        <div class="insta-grid-military">
+            <div class="insta-item">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600" alt="Manufacturing">
+                <div class="insta-overlay">
+                    <span class="insta-label">Fabrication</span>
+                </div>
+            </div>
+            <div class="insta-item">
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600" alt="Welding">
+                <div class="insta-overlay">
+                    <span class="insta-label">Welding</span>
+                </div>
+            </div>
+            <div class="insta-item">
+                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600" alt="Assembly">
+                <div class="insta-overlay">
+                    <span class="insta-label">Assembly</span>
+                </div>
+            </div>
+            <div class="insta-item">
+                <img src="https://images.unsplash.com/photo-1581092160607-ee67e1b93f61?w=600" alt="Testing">
+                <div class="insta-overlay">
+                    <span class="insta-label">Testing</span>
+                </div>
+            </div>
+            <div class="insta-item">
+                <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=600" alt="Quality Control">
+                <div class="insta-overlay">
+                    <span class="insta-label">QC</span>
+                </div>
+            </div>
+            <div class="insta-item">
+                <img src="https://images.unsplash.com/photo-1581092162384-8987c1d64926?w=600" alt="Finishing">
+                <div class="insta-overlay">
+                    <span class="insta-label">Finishing</span>
+                </div>
+            </div>
+            <div class="insta-item">
+                <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600" alt="Inspection">
+                <div class="insta-overlay">
+                    <span class="insta-label">Inspection</span>
+                </div>
+            </div>
+            <div class="insta-item">
+                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600" alt="Delivery">
+                <div class="insta-overlay">
+                    <span class="insta-label">Delivery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-blueprint" id="contact">
+        <h2>Configure Your Breath Trailer</h2>
+        <p>Precision engineering meets personalized design</p>
+        <a href="#" class="cta-btn-blueprint">Start Configuration</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <ul class="footer-links">
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Press</a></li>
+        </ul>
+        <p class="footer-copy">Crafted in Australia · © 2024 Breath Trailer</p>
+    </footer>
+
+    <!-- GSAP Animations -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // SVG Line Drawing Animation
+        const trailerOutlines = document.querySelectorAll('.trailer-outline');
+        trailerOutlines.forEach(outline => {
+            const length = outline.getTotalLength();
+            outline.style.strokeDasharray = length;
+            outline.style.strokeDashoffset = length;
+            
+            gsap.to(outline, {
+                strokeDashoffset: 0,
+                duration: 2,
+                ease: 'power2.inOut',
+                scrollTrigger: {
+                    trigger: '.trailer-diagram',
+                    start: 'top center',
+                    end: 'bottom center',
+                    scrub: 1
+                }
+            });
+        });
+        
+        // Dimension Lines Fade In
+        gsap.to('.dimension-line, .dimension-text', {
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: '.trailer-diagram',
+                start: 'top center',
+            }
+        });
+        
+        // Counter Animation for Specs
+        const animateCounter = (element, target) => {
+            gsap.to(element, {
+                innerHTML: target,
+                duration: 2,
+                ease: 'power2.out',
+                snap: { innerHTML: 1 },
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top 80%',
+                }
+            });
+        };
+        
+        document.querySelectorAll('[data-target]').forEach(el => {
+            const target = parseFloat(el.getAttribute('data-target'));
+            animateCounter(el, target);
+        });
+        
+        // Certification Items
+        gsap.from('.cert-item', {
+            y: 60,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.cert-grid',
+                start: 'top 70%',
+            }
+        });
+        
+        // X-Ray Items
+        gsap.from('.xray-item', {
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.xray-grid',
+                start: 'top 70%',
+            }
+        });
+        
+        // Instagram Grid
+        gsap.from('.insta-item', {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.05,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: '.insta-grid-military',
+                start: 'top 70%',
+            }
+        });
+    </script>
+</body>
+</html>

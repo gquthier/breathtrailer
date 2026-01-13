@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breath Trailer | Premium Lightweight Adventure</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Premium/Luxe Brand Colors */
+            --color-forest: #4A5D3D;
+            --color-forest-dark: #3d4e33;
+            --color-forest-light: #5a7049;
+            --color-sand: #F4F4F1;
+            --color-sand-dark: #e8e8e5;
+            --color-white: #FFFFFF;
+            --color-text-dark: #2a2a2a;
+            --color-text-muted: #6a6a6a;
+            --color-gold: #C9A961;
+
+            /* Typography */
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+
+            /* Spacing */
+            --section-padding: clamp(4rem, 10vh, 8rem);
+            --container-padding: clamp(1.5rem, 5vw, 8rem);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--color-sand);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(244, 244, 241, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 93, 61, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem var(--container-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-forest);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--color-text-dark);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-forest);
+        }
+
+        /* SECTION 1: Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            background: var(--color-sand);
+        }
+
+        .hero-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-content {
+            padding: 2rem 0;
+        }
+
+        .hero-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--color-text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-headline-highlight {
+            color: var(--color-forest);
+            display: block;
+        }
+
+        .hero-subheadline {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-video {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(74, 93, 61, 0.15);
+        }
+
+        .badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+        }
+
+        .badge-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-white);
+            border-radius: 50%;
+            border: 2px solid var(--color-gold);
+            font-size: 1.2rem;
+        }
+
+        .badge-text {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* SECTION 2: Problem Section */
+        .problem-section {
+            padding: var(--section-padding) 0;
+            background: var(--color-white);
+        }
+
+        .problem-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--color-text-dark);
+            line-height: 1.3;
+            margin-bottom: 4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .problem-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+            text-align: left;
+        }
+
+        .problem-item {
+            padding: 2rem;
+            background: var(--color-sand);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .problem-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 2px solid var(--color-forest);
+            color: var(--color-forest);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .problem-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-forest);
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .problem-text {
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            line-height: 1.6;
+        }
+
+        .problem-conclusion {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--color-forest);
+            line-height: 1.5;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--color-sand);
+            border-radius: 8px;
+        }
+
+        /* SECTION 3: Video Section (Lead Magnet) */
+        .video-section {
+            padding: var(--section-padding) 0;
+            background: var(--color-sand);
+        }
+
+        .video-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .video-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            color: var(--color-text-dark);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .video-description {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            margin-bottom: 3rem;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: var(--color-forest);
+            color: var(--color-white);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-forest);
+        }
+
+        .cta-button:hover {
+            background: var(--color-forest-dark);
+            border-color: var(--color-forest-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74, 93, 61, 0.3);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            color: var(--color-forest);
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--color-forest);
+            color: var(--color-white);
+        }
+
+        /* SECTION 4: Testimonials */
+        .testimonials-section {
+            padding: var(--section-padding) 0;
+            background: var(--color-white);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .testimonials-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--color-forest);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .testimonials-subheadline {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .testimonial-card {
+            background: var(--color-sand);
+            padding: 3rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .star {
+            color: var(--color-gold);
+            font-size: 1rem;
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-text-dark);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-forest);
+            letter-spacing: 0.02em;
+        }
+
+        .testimonial-location {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Video Testimonials */
+        .video-testimonials {
+            margin-top: 5rem;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(74, 93, 61, 0.15);
+        }
+
+        .video-testimonials-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: var(--color-forest);
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+        }
+
+        .video-testimonials-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .video-testimonial-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            width: 257px;
+            height: 468px;
+            transition: transform 0.3s ease;
+        }
+
+        .video-testimonial-wrapper:hover {
+            transform: translateY(-8px);
+        }
+
+        .video-testimonial-wrapper iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* NEW: Comparison Section */
+        .comparison-section {
+            padding: var(--section-padding) 0;
+            background: var(--color-sand);
+        }
+
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .comparison-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--color-text-dark);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .comparison-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .comparison-column {
+            background: var(--color-white);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-column:hover {
+            transform: translateY(-8px);
+        }
+
+        .comparison-column.featured {
+            background: var(--color-forest);
+            color: var(--color-white);
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(74, 93, 61, 0.3);
+        }
+
+        .comparison-column.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .comparison-column-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--color-sand);
+        }
+
+        .comparison-column.featured .comparison-column-header {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .comparison-column-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-column.featured .comparison-column-title {
+            color: var(--color-white);
+        }
+
+        .comparison-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--color-gold);
+            color: var(--color-white);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 20px;
+        }
+
+        .comparison-items {
+            list-style: none;
+        }
+
+        .comparison-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-sand);
+        }
+
+        .comparison-column.featured .comparison-item {
+            border-bottom-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .comparison-item-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-column.featured .comparison-item-label {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .comparison-item-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        .comparison-column.featured .comparison-item-value {
+            color: var(--color-white);
+        }
+
+        /* NEW: Features Grid Section */
+        .features-section {
+            padding: var(--section-padding) 0;
+            background: var(--color-white);
+        }
+
+        .features-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--color-forest);
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-forest);
+            border-radius: 50%;
+        }
+
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--color-white);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-title {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        /* NEW: Pricing Section */
+        .pricing-section {
+            padding: var(--section-padding) 0;
+            background: var(--color-sand);
+        }
+
+        .pricing-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--color-text-dark);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .pricing-subheadline {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--color-white);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .pricing-card.featured {
+            background: var(--color-forest);
+            color: var(--color-white);
+            transform: scale(1.05);
+        }
+
+        .pricing-model {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card.featured .pricing-model {
+            color: var(--color-white);
+        }
+
+        .pricing-range {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card.featured .pricing-range {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--color-sand);
+            font-size: 0.9rem;
+        }
+
+        .pricing-card.featured .pricing-features li {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* SECTION 5: Instagram */
+        .instagram-section {
+            padding: var(--section-padding) 0;
+            background: var(--color-sand);
+            text-align: center;
+        }
+
+        .instagram-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--color-text-dark);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .instagram-handle {
+            font-size: 1.2rem;
+            color: var(--color-forest);
+            font-weight: 500;
+            margin-bottom: 3rem;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .instagram-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .instagram-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-forest);
+            padding: 4rem var(--container-padding);
+            color: var(--color-white);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand {
+            max-width: 400px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .footer-description {
+            font-size: 0.95rem;
+            color: rgba(244, 244, 241, 0.7);
+            line-height: 1.7;
+        }
+
+        .footer-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: rgba(244, 244, 241, 0.9);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            font-size: 0.9rem;
+            color: rgba(244, 244, 241, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-white);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(244, 244, 241, 0.2);
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(244, 244, 241, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: clamp(3rem, 8vh, 5rem);
+                --container-padding: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-headline {
+                font-size: 2.5rem;
+            }
+
+            .problem-list {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .instagram-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-badges {
+                justify-content: space-between;
+                gap: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .comparison-column:first-child {
+                display: none;
+            }
+
+            .comparison-column.featured {
+                transform: scale(1);
+            }
+        }
+
+        /* Subtle animations - keeping it simple */
+        @media (prefers-reduced-motion: no-preference) {
+            .hero-headline,
+            .hero-subheadline,
+            .hero-image {
+                animation: fadeInUp 0.8s ease-out;
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Breath</a>
+            <ul class="nav-links">
+                <li><a href="#models">Models</a></li>
+                <li><a href="#video">Video</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-headline">
+                        Most Trailers Are Built for Everyone
+                        <span class="hero-headline-highlight">Except People Like You</span>
+                    </h1>
+                    <p class="hero-subheadline">
+                        You deserve a trailer engineered for adventure, designed for comfort, and crafted with uncompromising attention to detail.
+                    </p>
+
+                    <!-- Hero Video -->
+                    <div class="hero-video">
+                        <iframe src="https://www.youtube.com/embed/mGmIBw4OeVU?si=Ks-T-0zJElteG6Op" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <a href="#contact" class="cta-button">Start My Custom Design Session</a>
+
+                    <!-- Trust Badges -->
+                    <div class="trust-badges">
+                        <div class="badge-item">
+                            <div class="badge-icon">🏆</div>
+                            <span class="badge-text">Gold Sydney<br>Design Award</span>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon">📰</div>
+                            <span class="badge-text">Featured in<br>RV Daily</span>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon">⭐</div>
+                            <span class="badge-text">300+ Happy<br>Customers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Problem Section -->
+    <section class="problem-section" id="models">
+        <div class="container">
+            <div class="problem-container">
+                <h2 class="problem-headline">You've probably already looked around...<br>You've seen:</h2>
+
+                <div class="problem-list">
+                    <div class="problem-item">
+                        <div class="problem-icon">
+                            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </div>
+                        <p class="problem-text"><strong>Bulky, overbuilt caravans</strong></p>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-icon">
+                            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </div>
+                        <p class="problem-text"><strong>Cheap imports with poor insulation</strong></p>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-icon">
+                            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </div>
+                        <p class="problem-text"><strong>Heavy campers that strain small SUVs</strong></p>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-icon">
+                            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </div>
+                        <p class="problem-text"><strong>Complicated setups</strong></p>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-icon">
+                            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </div>
+                        <p class="problem-text"><strong>No real design or comfort</strong></p>
+                    </div>
+                </div>
+
+                <div class="problem-conclusion">
+                    You want something simple, capable, and comfortable.<br>
+                    Something that suits how you actually travel.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Video Section (Lead Magnet) -->
+    <section class="video-section" id="video">
+        <div class="container">
+            <div class="video-container">
+                <h2 class="video-headline">Before You Choose a Trailer,<br>Watch This</h2>
+                <p class="video-description">
+                    How we design and build trailers that work the way you actually travel.
+                </p>
+
+                <div class="video-embed">
+                    <iframe 
+                        src="https://www.youtube.com/embed/Jm0MizP8MIs" 
+                        title="Breath Trailer Showcase" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <a href="#contact" class="cta-button">Start My Custom Design Session</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Features -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="features-headline">What Every Breath Trailer Includes</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
+                    <h3 class="feature-title">Ultra-Lightweight Design</h3>
+                    <p class="feature-description">700-1200kg • Small SUV friendly</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    </div>
+                    <h3 class="feature-title">Hard-Shell Insulated</h3>
+                    <p class="feature-description">Warm in winter, cool in summer</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <h3 class="feature-title">5-Minute Setup</h3>
+                    <p class="feature-description">No complicated assembly</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><path d="M23 13v-3h-4"></path></svg>
+                    </div>
+                    <h3 class="feature-title">Off-Grid Ready</h3>
+                    <p class="feature-description">Solar + battery system</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 19l7 3-7-16-7 16 7-3z"></path><circle cx="12" cy="19" r="2"></circle></svg>
+                    </div>
+                    <h3 class="feature-title">100+ Colours</h3>
+                    <p class="feature-description">Fully customizable design</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                    </div>
+                    <h3 class="feature-title">Award-Winning</h3>
+                    <p class="feature-description">Gold Sydney Design Award 2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Pricing Models -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="pricing-headline">Choose Your Adventure</h2>
+            <p class="pricing-subheadline">Pay only for what you need</p>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3 class="pricing-model">Essential</h3>
+                    <p class="pricing-range">From $19,990</p>
+                    <ul class="pricing-features">
+                        <li>✓ Lightweight teardrop</li>
+                        <li>✓ Perfect for weekends</li>
+                        <li>✓ ~700-800kg</li>
+                        <li>✓ Small SUV friendly</li>
+                    </ul>
+                    <a href="#contact" class="cta-button cta-button-secondary">Learn More</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3 class="pricing-model">Plus+</h3>
+                    <p class="pricing-range">From $27,000</p>
+                    <ul class="pricing-features">
+                        <li>✓ Most popular model</li>
+                        <li>✓ Solar + battery ready</li>
+                        <li>✓ ~800-900kg</li>
+                        <li>✓ Extended storage</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Start Design Session</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-model">Ultra</h3>
+                    <p class="pricing-range">From $37,000</p>
+                    <ul class="pricing-features">
+                        <li>✓ Maximum comfort</li>
+                        <li>✓ Hot water system</li>
+                        <li>✓ ~900-1100kg</li>
+                        <li>✓ Off-road capable</li>
+                    </ul>
+                    <a href="#contact" class="cta-button cta-button-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Comparison -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="comparison-header">
+                <h2 class="comparison-headline">How Breath Compares</h2>
+            </div>
+            
+            <div class="comparison-grid">
+                <!-- Column 1: Feature Labels (Hidden on mobile, acts as reference) -->
+                <div class="comparison-column">
+                    <div class="comparison-column-header">
+                        <h3 class="comparison-column-title">Compare</h3>
+                    </div>
+                    <ul class="comparison-items">
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Setup Time</div>
+                            <div class="comparison-item-value">—</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Weight</div>
+                            <div class="comparison-item-value">—</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Price Range</div>
+                            <div class="comparison-item-value">—</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Insulation</div>
+                            <div class="comparison-item-value">—</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Customization</div>
+                            <div class="comparison-item-value">—</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Storage</div>
+                            <div class="comparison-item-value">—</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: Breath Trailer (FEATURED) -->
+                <div class="comparison-column featured">
+                    <div class="comparison-column-header">
+                        <h3 class="comparison-column-title">Breath Trailer</h3>
+                        <span class="comparison-badge">Best Value</span>
+                    </div>
+                    <ul class="comparison-items">
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Setup Time</div>
+                            <div class="comparison-item-value">~5 minutes</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Weight</div>
+                            <div class="comparison-item-value">700-1200kg</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Price Range</div>
+                            <div class="comparison-item-value">$19,990 - $37,000</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Insulation</div>
+                            <div class="comparison-item-value">Hard-shell insulated</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Customization</div>
+                            <div class="comparison-item-value">Fully custom</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Storage</div>
+                            <div class="comparison-item-value">Garage-friendly</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Pop-Up Campers -->
+                <div class="comparison-column">
+                    <div class="comparison-column-header">
+                        <h3 class="comparison-column-title">Pop-Up Campers</h3>
+                    </div>
+                    <ul class="comparison-items">
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Setup Time</div>
+                            <div class="comparison-item-value">20-40 minutes</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Weight</div>
+                            <div class="comparison-item-value">900-1800kg</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Price Range</div>
+                            <div class="comparison-item-value">$30,000 - $50,000</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Insulation</div>
+                            <div class="comparison-item-value">Fabric walls</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Customization</div>
+                            <div class="comparison-item-value">Limited</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Storage</div>
+                            <div class="comparison-item-value">Outdoor</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Large Caravan -->
+                <div class="comparison-column">
+                    <div class="comparison-column-header">
+                        <h3 class="comparison-column-title">Large Caravan</h3>
+                    </div>
+                    <ul class="comparison-items">
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Setup Time</div>
+                            <div class="comparison-item-value">20-45 minutes</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Weight</div>
+                            <div class="comparison-item-value">1500kg+</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Price Range</div>
+                            <div class="comparison-item-value">$55,000 - $90,000+</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Insulation</div>
+                            <div class="comparison-item-value">Good</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Customization</div>
+                            <div class="comparison-item-value">Pre-set packages</div>
+                        </li>
+                        <li class="comparison-item">
+                            <div class="comparison-item-label">Storage</div>
+                            <div class="comparison-item-value">Often off-site</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: Testimonials & Social Proof -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2 class="testimonials-headline">Trusted by Adventurers Worldwide</h2>
+                <p class="testimonials-subheadline">Real stories from real travelers</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-quote">
+                        "The attention to detail is incredible. Every inch of this trailer has been thoughtfully designed. It's transformed how we experience the outdoors."
+                    </p>
+                    <div class="testimonial-author">Fernanda Cristina</div>
+                    <div class="testimonial-location">Gold Coast, Australia</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-quote">
+                        "After years of compromising with heavy caravans, the Breath Trailer is a revelation. Lightweight, beautifully built, and our SUV barely notices it."
+                    </p>
+                    <div class="testimonial-author">Maureen Clark</div>
+                    <div class="testimonial-location">Melbourne, Australia</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-quote">
+                        "This isn't just a trailer, it's a lifestyle upgrade. The craftsmanship and engineering are outstanding. Worth every penny."
+                    </p>
+                    <div class="testimonial-author">Isadora Rovaai</div>
+                    <div class="testimonial-location">Sydney, Australia</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-quote">
+                        "Setup takes minutes, not hours. The design is so intuitive. We spend more time enjoying nature and less time fighting with equipment."
+                    </p>
+                    <div class="testimonial-author">Ben</div>
+                    <div class="testimonial-location">Sydney, Australia</div>
+                </div>
+            </div>
+
+            <!-- Video Testimonials -->
+            <div class="video-testimonials">
+                <h3 class="video-testimonials-title">Real Stories from Real Travelers</h3>
+                <div class="video-testimonials-grid">
+                    <div class="video-testimonial-wrapper">
+                        <iframe src="https://www.youtube.com/embed/8jTUu8iR8Fg" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-testimonial-wrapper">
+                        <iframe src="https://www.youtube.com/embed/baVSnfpHx6k" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-testimonial-wrapper">
+                        <iframe src="https://www.youtube.com/embed/UGkshHW721c" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Instagram / Social Media -->
+    <section class="instagram-section">
+        <div class="container">
+            <h2 class="instagram-headline">Follow Our Adventures</h2>
+            <p class="instagram-handle">@BREATHTRAILER on Instagram</p>
+
+            <div class="instagram-grid">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" 
+                     alt="Workstation setup" 
+                     class="instagram-image">
+                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80" 
+                     alt="Waterfall adventure" 
+                     class="instagram-image">
+                <img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80" 
+                     alt="Snow camping" 
+                     class="instagram-image">
+                <img src="https://images.unsplash.com/photo-1533873984035-25970ab07461?w=800&q=80" 
+                     alt="Stereo sound system" 
+                     class="instagram-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">Breath</div>
+                <p class="footer-description">
+                    Engineered for adventure. Designed for comfort. Built for those who refuse to compromise.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3 class="footer-section-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#models">Models</a></li>
+                    <li><a href="#video">Video Showcase</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 class="footer-section-title">Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Warranty</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2025 Breath Trailer. All rights reserved. Crafted in Australia.
+        </div>
+    </footer>
+</body>
+</html>
