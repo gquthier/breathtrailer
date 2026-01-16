@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -69,8 +72,8 @@
             pointer-events: none;
             z-index: 9999;
             transition: transform 0.15s var(--ease-out-expo),
-                        opacity 0.15s ease,
-                        background 0.15s ease;
+                opacity 0.15s ease,
+                background 0.15s ease;
             transform: translate(-50%, -50%);
             mix-blend-mode: difference;
         }
@@ -118,7 +121,316 @@
             letter-spacing: -0.02em;
             text-decoration: none;
         }
-        
+
+        /* --- NEW SECTIONS CSS --- */
+
+        /* 1. Numbers Section (from Variant 1) */
+        .tech-specs {
+            padding: 10rem 5vw;
+            background: var(--color-sand);
+            position: relative;
+            z-index: 2;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .spec-item {
+            position: relative;
+            padding: 2rem 0;
+            border-top: 2px solid var(--color-forest);
+        }
+
+        .spec-number {
+            font-family: var(--font-serif);
+            /* Adapted to match Home style */
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--color-forest);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-unit {
+            font-size: 0.5em;
+            vertical-align: super;
+        }
+
+        .spec-label {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(26, 26, 26, 0.6);
+            margin-top: 1rem;
+        }
+
+        .spec-detail {
+            font-size: 0.9rem;
+            color: rgba(26, 26, 26, 0.5);
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* 2. Reviews Carousel (Single Line) */
+        .reviews-section {
+            padding: 5rem 0;
+            background: var(--color-white);
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .reviews-wrapper {
+            display: flex;
+            width: fit-content;
+            animation: infiniteScroll 80s linear infinite;
+        }
+
+        .review-card {
+            width: 400px;
+            padding: 2rem;
+            margin-right: 2rem;
+            background: var(--color-sand);
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .review-text {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--color-text-dark);
+        }
+
+        .review-author {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-forest);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .reviews-see-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn-see-more {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 1px solid var(--color-forest);
+            color: var(--color-forest);
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-see-more:hover {
+            background: var(--color-forest);
+            color: var(--color-text-light);
+        }
+
+        /* 3. Gallery Motion */
+        .gallery-motion {
+            padding: 10vh 0;
+            background: var(--color-charcoal);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* New Gallery Row Styles */
+        .gallery-row {
+            display: flex;
+            gap: 2rem;
+            width: fit-content;
+        }
+
+        .gallery-row.left {
+            animation: infiniteScroll 80s linear infinite;
+        }
+
+        .gallery-row.right {
+            animation: infiniteScrollReverse 80s linear infinite;
+        }
+
+        .gallery-item {
+            width: 350px;
+            /* Wider landscape cards */
+            height: 250px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+            opacity: 0.8;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .gallery-item:hover {
+            opacity: 1;
+            z-index: 2;
+            transform: scale(1.02);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* 4. Wall of Reviews */
+        .wall-reviews {
+            padding: 10vh 0;
+            background: var(--color-sand);
+            overflow: hidden;
+        }
+
+        .wall-row {
+            display: flex;
+            width: fit-content;
+            margin-bottom: 1.5rem;
+        }
+
+        .wall-row.left {
+            animation: infiniteScroll 100s linear infinite;
+        }
+
+        .wall-row.right {
+            animation: infiniteScrollReverse 100s linear infinite;
+        }
+
+        .wall-card {
+            width: 350px;
+            padding: 1.5rem;
+            margin-right: 1.5rem;
+            background: var(--color-white);
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            flex-shrink: 0;
+        }
+
+        /* 5. Our Models */
+        .models-section {
+            padding: 10rem 5vw;
+            background: var(--color-white);
+        }
+
+        .models-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .model-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .model-image {
+            background: var(--color-sand);
+            aspect-ratio: 3/4;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .model-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .model-card:hover .model-image img {
+            transform: scale(1.05);
+        }
+
+        .model-name {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .model-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        /* 6. FAQ Section */
+        .faq-section {
+            padding: 10rem 20vw;
+            background: var(--color-sand);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            padding: 2rem 0;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.4s ease;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .faq-answer p {
+            padding-bottom: 2rem;
+        }
+
+        @keyframes infiniteScroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes infiniteScrollReverse {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+
         .nav-logo-img {
             width: 40px;
             height: 40px;
@@ -185,12 +497,10 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(26, 26, 26, 0.35) 0%,
-                rgba(26, 26, 26, 0.1) 40%,
-                rgba(26, 26, 26, 0.5) 100%
-            );
+            background: linear-gradient(to bottom,
+                    rgba(26, 26, 26, 0.35) 0%,
+                    rgba(26, 26, 26, 0.1) 40%,
+                    rgba(26, 26, 26, 0.5) 100%);
             z-index: 1;
         }
 
@@ -322,8 +632,17 @@
         }
 
         @keyframes scrollPulse {
-            0%, 100% { transform: scaleY(1); opacity: 1; }
-            50% { transform: scaleY(0.5); opacity: 0.5; }
+
+            0%,
+            100% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scaleY(0.5);
+                opacity: 0.5;
+            }
         }
 
         /* Manifesto Section */
@@ -398,7 +717,7 @@
             transform: scaleX(0);
             transform-origin: left;
         }
-        
+
         /* Video Section */
         .video-section {
             position: relative;
@@ -406,7 +725,7 @@
             background: var(--color-charcoal);
             overflow: hidden;
         }
-        
+
         .video-section-sticky {
             position: sticky;
             top: 0;
@@ -415,7 +734,7 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .video-background {
             position: absolute;
             inset: 0;
@@ -472,19 +791,17 @@
             opacity: 0 !important;
             visibility: hidden !important;
         }
-        
+
         .video-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(26, 26, 26, 0.5) 0%,
-                rgba(26, 26, 26, 0.3) 50%,
-                rgba(26, 26, 26, 0.6) 100%
-            );
+            background: linear-gradient(to bottom,
+                    rgba(26, 26, 26, 0.5) 0%,
+                    rgba(26, 26, 26, 0.3) 50%,
+                    rgba(26, 26, 26, 0.6) 100%);
             z-index: 1;
         }
-        
+
         .video-content {
             position: relative;
             z-index: 2;
@@ -493,7 +810,7 @@
             padding: 0 5vw;
             max-width: 800px;
         }
-        
+
         .video-title {
             font-family: var(--font-serif);
             font-size: clamp(2.5rem, 6vw, 5rem);
@@ -503,7 +820,7 @@
             margin-bottom: 1.5rem;
             line-height: 1.1;
         }
-        
+
         .video-subtitle {
             font-size: clamp(0.9rem, 1.2vw, 1.1rem);
             color: rgba(244, 244, 241, 0.8);
@@ -1051,22 +1368,64 @@
                 grid-template-rows: auto;
             }
 
-            .bento-item-1 { grid-column: 1 / 7; grid-row: 1 / 2; min-height: 300px; }
-            .bento-item-2 { grid-column: 1 / 4; grid-row: 2 / 3; min-height: 250px; }
-            .bento-item-3 { grid-column: 4 / 7; grid-row: 2 / 3; }
-            .bento-item-4 { grid-column: 1 / 4; grid-row: 3 / 4; min-height: 300px; }
-            .bento-item-5 { grid-column: 4 / 7; grid-row: 3 / 4; }
-            .bento-item-6 { grid-column: 1 / 7; grid-row: 4 / 5; min-height: 300px; }
-            .bento-item-7 { grid-column: 1 / 7; grid-row: 5 / 6; min-height: 250px; }
+            .bento-item-1 {
+                grid-column: 1 / 7;
+                grid-row: 1 / 2;
+                min-height: 300px;
+            }
+
+            .bento-item-2 {
+                grid-column: 1 / 4;
+                grid-row: 2 / 3;
+                min-height: 250px;
+            }
+
+            .bento-item-3 {
+                grid-column: 4 / 7;
+                grid-row: 2 / 3;
+            }
+
+            .bento-item-4 {
+                grid-column: 1 / 4;
+                grid-row: 3 / 4;
+                min-height: 300px;
+            }
+
+            .bento-item-5 {
+                grid-column: 4 / 7;
+                grid-row: 3 / 4;
+            }
+
+            .bento-item-6 {
+                grid-column: 1 / 7;
+                grid-row: 4 / 5;
+                min-height: 300px;
+            }
+
+            .bento-item-7 {
+                grid-column: 1 / 7;
+                grid-row: 5 / 6;
+                min-height: 250px;
+            }
         }
 
         @media (max-width: 768px) {
-            .nav { padding: 1rem 1.5rem; }
-            .nav-links { display: none; }
+            .nav {
+                padding: 1rem 1.5rem;
+            }
 
-            .cursor, .cursor-dot { display: none; }
+            .nav-links {
+                display: none;
+            }
 
-            .manifesto-container { padding: 0 5vw; }
+            .cursor,
+            .cursor-dot {
+                display: none;
+            }
+
+            .manifesto-container {
+                padding: 0 5vw;
+            }
 
             .engineering-stats {
                 flex-direction: column;
@@ -1093,8 +1452,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .bento-item-1, .bento-item-2, .bento-item-3,
-            .bento-item-4, .bento-item-5, .bento-item-6,
+            .bento-item-1,
+            .bento-item-2,
+            .bento-item-3,
+            .bento-item-4,
+            .bento-item-5,
+            .bento-item-6,
             .bento-item-7 {
                 grid-column: 1;
                 grid-row: auto;
@@ -1146,15 +1509,370 @@
             opacity: 0.025;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
+
+        /* Social Proof Wall */
+        .social-proof-wall {
+            padding: 10vh 0;
+            background: var(--color-sand);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wall-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 0 5vw;
+        }
+
+        .wall-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-forest);
+            margin-bottom: 1rem;
+        }
+
+        .wall-marquee {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+        }
+
+
+
+        .wall-track.row-a {
+            animation: marquee-left 60s linear infinite;
+        }
+
+        .wall-track.row-b {
+            animation: marquee-right 60s linear infinite;
+        }
+
+        .social-proof-wall:hover .wall-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee-left {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes marquee-right {
+            from {
+                transform: translateX(-50%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* CARDS & MASONRY */
+        .wall-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            will-change: transform;
+            align-items: stretch;
+            /* Ensure full height */
+            padding: 1rem 0;
+        }
+
+        .sp-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 380px;
+            /* Fixed width for standard columns */
+            flex-shrink: 0;
+        }
+
+        /* Two heights logic: 
+           Total Wall Height = 480px (approx)
+           Tall Card = 100%
+           Short Card = ~50%
+        */
+
+        .social-proof-wall {
+            height: auto;
+            min-height: 550px;
+            /* Accommodate the masonry track */
+        }
+
+        .sp-card {
+            background: var(--color-white);
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            /* Fill column */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Heights */
+        .sp-card.tall {
+            height: 440px;
+            /* Full height */
+        }
+
+        .sp-card.short {
+            height: 208px;
+            /* (440px - 1.5rem) / 2 for perfect alignment */
+        }
+
+        .sp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            z-index: 10;
+        }
+
+        /* Review Card */
+        .sp-card.review {
+            padding: 2rem;
+            justify-content: space-between;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-stars {
+            color: #F59E0B;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .review-icon {
+            opacity: 0.2;
+            width: 20px;
+        }
+
+        .review-body {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.15rem;
+            line-height: 1.5;
+            color: var(--color-text-dark);
+            /* Line clamping based on height */
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            display: box;
+            box-orient: vertical;
+            line-clamp: 4;
+            overflow: hidden;
+        }
+
+        .sp-card.short .review-body {
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+            font-size: 1.05rem;
+        }
+
+        .sp-card.tall .review-body {
+            -webkit-line-clamp: 10;
+            line-clamp: 10;
+            font-size: 1.25rem;
+        }
+
+        .review-meta {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--color-forest);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding-top: 1rem;
+        }
+
+        /* Press Card */
+        .sp-card.press {
+            display: block;
+        }
+
+        .press-image {
+            height: 55%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .press-content {
+            padding: 1.5rem;
+            height: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .press-badge {
+            display: inline-block;
+            background: var(--color-stone);
+            color: var(--color-charcoal);
+            font-size: 0.6rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            width: fit-content;
+        }
+
+        .press-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
+
+        /* Award/Impact Card */
+        .sp-card.award {
+            text-align: center;
+            background: #1A1A1A;
+            color: #F4F4F1;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Video Card */
+        .sp-card.video {
+            position: relative;
+            background: #000;
+        }
+
+        .video-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        .sp-card.video:hover .video-thumb {
+            opacity: 0.6;
+        }
+
+        /* Gallery Card */
+        .sp-card.gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .sp-card.gallery:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modal/Lightbox */
+        .sp-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        /* ... existing modal styles ... */
+
+        .sp-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .sp-modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .sp-modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: #fff;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 10001;
+            padding: 1rem;
+            transition: opacity 0.3s;
+        }
+
+        .sp-modal-close:hover {
+            opacity: 0.7;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .wall-track {
+                animation: none !important;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .social-proof-wall {
+                padding: 10vh 0;
+            }
+
+            .wall-title {
+                font-size: 2rem;
+            }
+
+            /* On mobile, standard height for swipe */
+            .sp-card {
+                height: 200px;
+            }
+
+            .sp-card.small {
+                width: 240px;
+            }
+
+            .sp-card.medium {
+                width: 280px;
+            }
+
+            .sp-card.wide {
+                width: 320px;
+            }
+
+            .wall-track {
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Loading Screen -->
     <div class="loader">
         <div class="loader-content">
             <img src="logobreath.avif" alt="Breath Trailer Logo" class="loader-logo">
             <div class="loader-text">
-                <span>B</span><span>r</span><span>e</span><span>a</span><span>t</span><span>h</span><span> </span><span>T</span><span>r</span><span>a</span><span>i</span><span>l</span><span>e</span><span>r</span>
+                <span>B</span><span>r</span><span>e</span><span>a</span><span>t</span><span>h</span><span>
+                </span><span>T</span><span>r</span><span>a</span><span>i</span><span>l</span><span>e</span><span>r</span>
             </div>
         </div>
     </div>
@@ -1183,7 +1901,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-video-container">
-            <img src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-5-1--min-AMqny1RVrkFQwzXp.jpg" alt="Breath Trailer" class="hero-video" style="object-fit: cover; width: 100%; height: 100%;">
+            <img src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-5-1--min-AMqny1RVrkFQwzXp.jpg"
+                alt="Breath Trailer" class="hero-video" style="object-fit: cover; width: 100%; height: 100%;">
             <div class="hero-overlay"></div>
         </div>
 
@@ -1206,7 +1925,7 @@
     <section class="manifesto">
         <div class="manifesto-container">
             <p class="manifesto-line" data-line="1">
-                Most trailers are built for 
+                Most trailers are built for
                 <span class="slot-word" data-slot="1">
                     <span class="slot-word-inner">
                         <span class="slot-option">everyone...</span>
@@ -1251,30 +1970,32 @@
     <!-- Video Section -->
     <section class="video-section" id="video-experience">
         <div class="video-section-sticky">
-            <!-- Video Background -->
             <div class="video-background">
                 <script src="https://fast.wistia.com/embed/medias/208j22fnl5.jsonp" async></script>
                 <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
                 <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
-                    <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
-                        <div class="wistia_embed wistia_async_208j22fnl5 seo=false videoFoam=false playbar=false controlsVisibleOnLoad=false" style="height:100%;position:relative;width:100%" id="wistia-video-bg">
-                            <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
-                                <img src="https://fast.wistia.com/embed/medias/208j22fnl5/swatch" style="filter:blur(5px);height:100%;object-fit:cover;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
+                    <div class="wistia_responsive_wrapper"
+                        style="height:100%;left:0;position:absolute;top:0;width:100%;">
+                        <div class="wistia_embed wistia_async_208j22fnl5 seo=false videoFoam=false playbar=false controlsVisibleOnLoad=false"
+                            style="height:100%;position:relative;width:100%" id="wistia-video-bg">
+                            <div class="wistia_swatch"
+                                style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
+                                <img src="https://fast.wistia.com/embed/medias/208j22fnl5/swatch"
+                                    style="filter:blur(5px);height:100%;object-fit:cover;width:100%;" alt=""
+                                    aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Overlay -->
             <div class="video-overlay"></div>
-            
-            <!-- Content over video -->
             <div class="video-content">
                 <h2 class="video-title">Experience Breath Trailer</h2>
-                <p class="video-subtitle">See how we redefine adventure living with lightweight engineering and thoughtful design</p>
+                <p class="video-subtitle">See how we redefine adventure living with lightweight engineering and
+                    thoughtful design</p>
                 <div class="video-sound-hint">
-                    <svg class="video-sound-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="video-sound-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                         <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                         <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
@@ -1285,47 +2006,169 @@
         </div>
     </section>
 
-    <!-- Engineering Section -->
+    <!-- Lifestyle Section (The Call to Openroad) - SWAPPED UP -->
+    <section class="lifestyle" id="lifestyle-section">
+        <div class="lifestyle-header">
+            <h2><span>The Call of the Open Road</span></h2>
+            <p>Join a community of explorers who chose uncompromised excellence.</p>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-item bento-item-1">
+                <img class="bento-image"
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-26-AGBGklaB71uE8wWl.jpg"
+                    alt="Breath Trailer on coastal road">
+            </div>
+            <div class="bento-item bento-item-2">
+                <img class="bento-image"
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-1-min-YKbJQ3noE6sPVVrE.jpg"
+                    alt="Breath Trailer at sunset">
+            </div>
+            <div class="bento-item bento-item-3">
+                <div class="bento-testimonial">
+                    <p class="bento-testimonial-quote">"The Breath Trailer transformed how we travel. The lightweight
+                        build, the design... It's exactly what we were looking for."</p>
+                    <p class="bento-testimonial-author">— Sarah & James, Victoria</p>
+                </div>
+            </div>
+            <div class="bento-item bento-item-4">
+                <img class="bento-image"
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breath-essential-palmtree-ALp7QwZpyEsOb2l3.jpeg"
+                    alt="Breath Trailer on tropical beach">
+            </div>
+            <div class="bento-item bento-item-5">
+                <div class="bento-stat">
+                    <div class="bento-stat-number">2,500+</div>
+                    <div class="bento-stat-label">Adventurers equipped</div>
+                </div>
+            </div>
+            <div class="bento-item bento-item-6">
+                <img class="bento-image"
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-7-min-ALpJ9P77BNFZaoqO.jpg"
+                    alt="Breath Trailer with kitchen open">
+            </div>
+            <div class="bento-item bento-item-7">
+                <img class="bento-image"
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-6-AE0pkbwM9qsnJ5E2.jpg"
+                    alt="Breath Trailers on beach at dusk">
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- NEW: Our Models -->
+    <section class="models-section">
+        <div class="models-header">
+            <h2>Our Models</h2>
+        </div>
+        <div class="models-grid">
+            <a href="https://www.breathtrailer.com/breath-max-teardrop-trailer" class="model-card">
+                <div class="model-image"><img
+                        src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breath-ultra-in-snow-AwvDB1qvgxu914Km.jpeg">
+                </div>
+                <h3 class="model-name">Breath Max</h3>
+                <p class="model-desc">Stand-up comfort.</p>
+            </a>
+            <a href="https://www.breathtrailer.com/breath-ultra" class="model-card">
+                <div class="model-image"><img
+                        src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-1-min-YKbJQ3noE6sPVVrE.jpg">
+                </div>
+                <h3 class="model-name">Breath Ultra</h3>
+                <p class="model-desc">Rugged luxury.</p>
+            </a>
+            <a href="https://www.breathtrailer.com/breath-plus" class="model-card">
+                <div class="model-image"><img
+                        src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-6-AE0pkbwM9qsnJ5E2.jpg"></div>
+                <h3 class="model-name">Breath Plus</h3>
+                <p class="model-desc">Ready for anything.</p>
+            </a>
+            <a href="https://www.breathtrailer.com/breath-essential" class="model-card">
+                <div class="model-image"><img
+                        src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-26-AGBGklaB71uE8wWl.jpg">
+                </div>
+                <h3 class="model-name">Breath Essential</h3>
+                <p class="model-desc">Pure simplicity.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- NEW: Numbers Section (Above Engineering) -->
+    <section class="tech-specs" id="specs">
+        <div class="specs-grid">
+            <div class="spec-item">
+                <div class="spec-number" data-target="890">0<span class="spec-unit">kg</span></div>
+                <div class="spec-label">Total Mass</div>
+                <p class="spec-detail">Aerospace aluminum monocoque chassis</p>
+            </div>
+            <div class="spec-item">
+                <div class="spec-number">0.<span data-target="28">00</span><span class="spec-unit">Cd</span></div>
+                <div class="spec-label">Drag Coefficient</div>
+                <p class="spec-detail">Wind tunnel optimized teardrop profile</p>
+            </div>
+            <div class="spec-item">
+                <div class="spec-number" data-target="800">0<span class="spec-unit">W</span></div>
+                <div class="spec-label">Solar Capacity</div>
+                <p class="spec-detail">Monocrystalline panels</p>
+            </div>
+            <div class="spec-item">
+                <div class="spec-number" data-target="200">0<span class="spec-unit">Ah</span></div>
+                <div class="spec-label">Battery Storage</div>
+                <p class="spec-detail">LiFePO4 lithium system</p>
+            </div>
+            <div class="spec-item">
+                <div class="spec-number">R<span data-target="6.5">0.0</span></div>
+                <div class="spec-label">Insulation Value</div>
+                <p class="spec-detail">Multi-layer thermal barrier</p>
+            </div>
+            <div class="spec-item">
+                <div class="spec-number" data-target="15">0<span class="spec-unit">yrs</span></div>
+                <div class="spec-label">Warranty Period</div>
+                <p class="spec-detail">Comprehensive structure coverage</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Section - SWAPPED DOWN -->
     <section class="engineering">
         <div class="engineering-sticky">
             <div class="engineering-headline">
                 <h2>The Art of Engineering</h2>
                 <p>Every component, an intention</p>
             </div>
-
             <div class="engineering-visual">
-                <!-- Trailer Components (SVG placeholders) -->
                 <div class="trailer-component trailer-chassis" data-component="chassis">
                     <svg viewBox="0 0 600 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="50" y="80" width="500" height="40" rx="5" fill="#2a2a2a"/>
-                        <circle cx="150" cy="130" r="30" fill="#1a1a1a" stroke="#F4F4F1" stroke-width="2"/>
-                        <circle cx="450" cy="130" r="30" fill="#1a1a1a" stroke="#F4F4F1" stroke-width="2"/>
-                        <rect x="20" y="85" width="80" height="30" rx="3" fill="#F4F4F1"/>
+                        <rect x="50" y="80" width="500" height="40" rx="5" fill="#2a2a2a" />
+                        <circle cx="150" cy="130" r="30" fill="#1a1a1a" stroke="#F4F4F1" stroke-width="2" />
+                        <circle cx="450" cy="130" r="30" fill="#1a1a1a" stroke="#F4F4F1" stroke-width="2" />
+                        <rect x="20" y="85" width="80" height="30" rx="3" fill="#F4F4F1" />
                     </svg>
                 </div>
 
                 <div class="trailer-component trailer-body" data-component="body">
                     <svg viewBox="0 0 580 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M30 180 L30 50 Q30 30 50 30 L530 30 Q550 30 550 50 L550 180 Z" fill="#F4F4F1" stroke="#E0E0DA" stroke-width="2"/>
-                        <rect x="80" y="60" width="120" height="80" rx="5" fill="#87ceeb" opacity="0.4"/>
-                        <rect x="380" y="60" width="120" height="80" rx="5" fill="#87ceeb" opacity="0.4"/>
-                        <rect x="250" y="100" width="80" height="80" rx="3" fill="#3a3a3a"/>
+                        <path d="M30 180 L30 50 Q30 30 50 30 L530 30 Q550 30 550 50 L550 180 Z" fill="#F4F4F1"
+                            stroke="#E0E0DA" stroke-width="2" />
+                        <rect x="80" y="60" width="120" height="80" rx="5" fill="#87ceeb" opacity="0.4" />
+                        <rect x="380" y="60" width="120" height="80" rx="5" fill="#87ceeb" opacity="0.4" />
+                        <rect x="250" y="100" width="80" height="80" rx="3" fill="#3a3a3a" />
                     </svg>
                 </div>
 
                 <div class="trailer-component trailer-interior" data-component="interior">
                     <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="20" width="100" height="110" rx="5" fill="#8b7355"/>
-                        <rect x="140" y="50" width="120" height="80" rx="5" fill="#5a7049"/>
-                        <rect x="280" y="20" width="100" height="60" rx="5" fill="#4A5D3D"/>
-                        <circle cx="330" cy="100" r="25" fill="#708090"/>
+                        <rect x="20" y="20" width="100" height="110" rx="5" fill="#8b7355" />
+                        <rect x="140" y="50" width="120" height="80" rx="5" fill="#5a7049" />
+                        <rect x="280" y="20" width="100" height="60" rx="5" fill="#4A5D3D" />
+                        <circle cx="330" cy="100" r="25" fill="#708090" />
                     </svg>
                 </div>
 
                 <div class="trailer-component trailer-roof" data-component="roof">
                     <svg viewBox="0 0 560 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 60 L20 20 Q20 10 30 10 L530 10 Q540 10 540 20 L540 60" fill="#E0E0DA" stroke="#ccc" stroke-width="2"/>
-                        <rect x="200" y="5" width="160" height="10" rx="2" fill="#4A5D3D"/>
+                        <path d="M20 60 L20 20 Q20 10 30 10 L530 10 Q540 10 540 20 L540 60" fill="#E0E0DA" stroke="#ccc"
+                            stroke-width="2" />
+                        <rect x="200" y="5" width="160" height="10" rx="2" fill="#4A5D3D" />
                     </svg>
                 </div>
 
@@ -1348,80 +2191,299 @@
                     <span class="hotspot-label">Aerospace aluminium chassis</span>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="engineering-stats">
-                <div class="stat-item">
-                    <div class="stat-number">&lt;900<span class="stat-unit">kg</span></div>
-                    <div class="stat-label">Total weight</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">0.28<span class="stat-unit">Cd</span></div>
-                    <div class="stat-label">Drag coefficient</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">15<span class="stat-unit">yrs</span></div>
-                    <div class="stat-label">Structural warranty</div>
-                </div>
+    <!-- NEW: Gallery Motion (Below Engineering) -->
+    <section class="gallery-motion">
+        <!-- Row 1: Left Scroll (Exterior) -->
+        <div class="gallery-row left">
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.36-am-mP42R6JQvgiDR9kM.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.33-am-YNqPRz0r7OC5pa4X.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.36-am-1-mP42R6yoGXfy6NQp.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.29-am-1-Yg2qNEN2kohORze7.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-03-20-17-11-55-2-YNqBoaWxMWHr528W.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.36-am-1-AE0aR3Lnqein6vyP.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.35-am-1-AGBnR0x48gCq3vzJ.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.30-am-2-Yg2qNEnyk7TZ6ekM.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-03-20-19-04-43-3-1-YD0lgPLMqkUlPKe7.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-17-dJoJkygpQ4sKvlnN.jpg"></div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-7-min-ALpJ9P77BNFZaoqO.jpg"></div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-21-min-YD0pNoG75BCq3qyO.jpg"></div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-5.35.20-pm-1-YyvZ8LJBXaCaElZo.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-03-20-17-11-56-2-1-mk3vxBoeqqCGqJ77.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/images-breath-plus-beach-A85E1jL7WxUw407V.jpeg">
+            </div>
+            <!-- Duplicates -->
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.36-am-mP42R6JQvgiDR9kM.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.33-am-YNqPRz0r7OC5pa4X.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.36-am-1-mP42R6yoGXfy6NQp.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.29-am-1-Yg2qNEN2kohORze7.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-03-20-17-11-55-2-YNqBoaWxMWHr528W.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.36-am-1-AE0aR3Lnqein6vyP.jpeg">
+            </div>
+        </div>
+
+        <!-- Row 2: Right Scroll (Interior) -->
+        <div class="gallery-row right">
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.37-am-AzG32aQpj0sMNLDz.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/9c16ec1b-64b7-4734-a397-9406fb1f6d38-mP4QRGr7X8txlb8E.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.38-am-m7V5RzWWM8uLW5KV.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.33-am-1-A1aBRVMnwau3B7gx.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-01-13-12-48-57-7-m7V5kDnnQ1cXX3BM.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.34-am-1-AzG32aonzVc8rrJ6.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/3c81248b-ba0a-4b03-9cf9-8b23e4f3b351-dOq4Rwg0WjUWJ9e4.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-01-13-12-48-57-8-dOq8NZLV7jsWgrDO.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-01-13-12-48-57-2-ALp7b2ZZJjiexkEZ.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-01-13-12-45-04-m5KLr8B6WLTJzP36.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-01-10-at-4.55.07-pm-m5KLvDW7MLCZWZKe.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/pop-up-table-1-mxBMOraPjpcD58Gk.png"></div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2024-02-21-14-02-46-YKbNEX8VJXuy88b4.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/ultra-inside-3-A3QOaJjW7DflKoPW.jpg"></div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-17-min-1-AQEJRW45PehZkV3b.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2024-02-21-14-02-47-mnl5qP4NpEuN1ONG.jpg">
+            </div>
+            <!-- Duplicates -->
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.37-am-AzG32aQpj0sMNLDz.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/9c16ec1b-64b7-4734-a397-9406fb1f6d38-mP4QRGr7X8txlb8E.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.38-am-m7V5RzWWM8uLW5KV.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.33-am-1-A1aBRVMnwau3B7gx.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2025-01-13-12-48-57-7-m7V5kDnnQ1cXX3BM.jpg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.34-am-1-AzG32aonzVc8rrJ6.jpeg">
+            </div>
+        </div>
+
+        <!-- Row 3: Left Scroll (Mix) -->
+        <div class="gallery-row left">
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.36-am-mP42R6JQvgiDR9kM.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.33-am-YNqPRz0r7OC5pa4X.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.36-am-1-mP42R6yoGXfy6NQp.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.37-am-AzG32aQpj0sMNLDz.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/9c16ec1b-64b7-4734-a397-9406fb1f6d38-mP4QRGr7X8txlb8E.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.38-am-m7V5RzWWM8uLW5KV.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-7-min-ALpJ9P77BNFZaoqO.jpg"></div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-21-min-YD0pNoG75BCq3qyO.jpg"></div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/ultra-inside-3-A3QOaJjW7DflKoPW.jpg"></div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/photo-2024-02-21-14-02-46-YKbNEX8VJXuy88b4.jpg">
+            </div>
+            <!-- Duplicates -->
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.36-am-mP42R6JQvgiDR9kM.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.08.33-am-YNqPRz0r7OC5pa4X.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.36-am-1-mP42R6yoGXfy6NQp.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/whatsapp-image-2025-02-26-at-11.09.37-am-AzG32aQpj0sMNLDz.jpeg">
+            </div>
+            <div class="gallery-item"><img
+                    src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/9c16ec1b-64b7-4734-a397-9406fb1f6d38-mP4QRGr7X8txlb8E.jpeg">
             </div>
         </div>
     </section>
 
-    <!-- Lifestyle Section -->
-    <section class="lifestyle">
-        <div class="lifestyle-header">
-            <h2><span>The Call of the Open Road</span></h2>
-            <p>Join a community of explorers who chose uncompromised excellence.</p>
+    <!-- Social Proof Wall -->
+    <section class="social-proof-wall" id="social-proof">
+        <div class="wall-header">
+            <h2 class="wall-title">Loved by adventurers</h2>
+            <p
+                style="text-align:center; color: var(--color-forest); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.8rem; margin-top: 1rem;">
+                Real stories from the road</p>
         </div>
-
-        <div class="bento-grid">
-            <div class="bento-item bento-item-1">
-                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-26-AGBGklaB71uE8wWl.jpg" alt="Breath Trailer on coastal road">
-            </div>
-
-            <div class="bento-item bento-item-2">
-                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-1-min-YKbJQ3noE6sPVVrE.jpg" alt="Breath Trailer at sunset">
-            </div>
-
-            <div class="bento-item bento-item-3">
-                <div class="bento-testimonial">
-                    <p class="bento-testimonial-quote">"The Breath Trailer transformed how we travel. The lightweight build, the design... It's exactly what we were looking for."</p>
-                    <p class="bento-testimonial-author">— Sarah & James, Victoria</p>
-                </div>
-            </div>
-
-            <div class="bento-item bento-item-4">
-                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breath-essential-palmtree-ALp7QwZpyEsOb2l3.jpeg" alt="Breath Trailer on tropical beach">
-            </div>
-
-            <div class="bento-item bento-item-5">
-                <div class="bento-stat">
-                    <div class="bento-stat-number">2,500+</div>
-                    <div class="bento-stat-label">Adventurers equipped</div>
-                </div>
-            </div>
-
-            <div class="bento-item bento-item-6">
-                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-7-min-ALpJ9P77BNFZaoqO.jpg" alt="Breath Trailer with kitchen open">
-            </div>
-
-            <div class="bento-item bento-item-7">
-                <img class="bento-image" src="https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-6-AE0pkbwM9qsnJ5E2.jpg" alt="Breath Trailers on beach at dusk">
+        <div class="wall-marquee">
+            <!-- Unified single-track masonry -->
+            <div class="wall-track row-a" id="wall-track-unified">
+                <!-- Injected via JS -->
             </div>
         </div>
 
-        <div class="press-logos">
-            <svg class="press-logo" viewBox="0 0 120 30" fill="currentColor">
-                <text x="0" y="22" font-family="var(--font-sans)" font-size="14" font-weight="500">RV DAILY</text>
-            </svg>
-            <svg class="press-logo" viewBox="0 0 120 30" fill="currentColor">
-                <text x="0" y="22" font-family="var(--font-sans)" font-size="14" font-weight="500">CARAVAN</text>
-            </svg>
-            <svg class="press-logo" viewBox="0 0 120 30" fill="currentColor">
-                <text x="0" y="22" font-family="var(--font-sans)" font-size="14" font-weight="500">TRAVEL+</text>
-            </svg>
-            <svg class="press-logo" viewBox="0 0 150 30" fill="currentColor">
-                <text x="0" y="22" font-family="var(--font-sans)" font-size="14" font-weight="500">OUTDOOR LIFE</text>
-            </svg>
+        <!-- Lightbox Modal -->
+        <div class="sp-modal" id="sp-modal">
+            <button class="sp-modal-close" onclick="closeModal()">×</button>
+            <div class="sp-modal-content" id="sp-modal-content">
+                <!-- Content injected here -->
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- NEW: FAQ Section -->
+    <section class="faq-section">
+        <h2 style="text-align: center; margin-bottom: 4rem; font-family: var(--font-serif); font-size: 2.5rem;">FAQ</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">What is the lead time? <span style="font-size:1rem;">+</span></div>
+            <div class="faq-answer">
+                <p>Our typical lead time is 3-4 months depending on the model and customization selected. We will keep
+                    you updated throughout the process to ensure you're informed every step of the way.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Can I customize my Breath Trailer? <span style="font-size:1rem;">+</span></div>
+            <div class="faq-answer">
+                <p>Absolutely! The Breath Trailer is fully customizable. If you have specific requests for features like
+                    a TV or Bluetooth speakers that are not included in the 2D builder, just let us know, and we can
+                    definitely accommodate your needs.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What vehicle do you recommend for towing a Breath Trailer? <span
+                    style="font-size:1rem;">+</span></div>
+            <div class="faq-answer">
+                <p>The Breath Trailer is lightweight (starting at 720kg) and can be towed by most standard vehicles,
+                    such as mid-sized SUVs and trucks. If you're unsure about your vehicle's towing capacity, feel free
+                    to reach out, and we’ll help you check if it’s suitable.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Does the Breath Trailer offer any solutions for bringing bikes along? <span
+                    style="font-size:1rem;">+</span></div>
+            <div class="faq-answer">
+                <p>Yes! The Breath Trailer is equipped to carry bikes. It includes a 2” hitch receiver at the rear,
+                    rated for 200lbs, which is ideal for adding a bike rack.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Is the entire cabin insulated? <span style="font-size:1rem;">+</span></div>
+            <div class="faq-answer">
+                <p>Yes, the Breath Trailer's cabin is fully insulated. The insulation helps maintain comfort inside the
+                    trailer in a range of weather conditions, making it ideal for both hot and cold climates.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Do you offer solar power options? <span style="font-size:1rem;">+</span></div>
+            <div class="faq-answer">
+                <p>Yes! The Breath Trailer comes with the option to add solar power capabilities. You can equip your
+                    trailer with solar panels and a charge controller, allowing you to generate renewable energy while
+                    you enjoy the great outdoors.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What is the maximum tire size? <span style="font-size:1rem;">+</span></div>
+            <div class="faq-answer">
+                <p>The maximum tire size the Breath Trailer supports is 30 inches. With the off-road upgrade, you can
+                    select more rugged tires for challenging terrains.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Can I stand up inside a Breath Trailer? <span style="font-size:1rem;">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>No, the Breath Trailer’s interior height is 1200mm, designed for sitting and sleeping comfort. Its
+                    compact design prioritizes mobility, ease of towing, and efficient use of space.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Do you offer financing options? <span style="font-size:1rem;">+</span></div>
+            <div class="faq-answer">
+                <p>Yes, we offer financing options for the Breath Trailer! Please contact us for more details on
+                    available financing options and how to apply.</p>
+            </div>
         </div>
     </section>
 
@@ -1483,6 +2545,236 @@
         }
         requestAnimationFrame(raf);
 
+        // --- NEW JS FOR SECTIONS ---
+
+        // 1. Numbers/Tech Specs Animations
+        const animateCounter = (element, target) => {
+            gsap.to(element, {
+                innerHTML: target,
+                duration: 2,
+                ease: 'power2.out',
+                snap: { innerHTML: 1 },
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top 80%',
+                }
+            });
+        };
+
+        document.querySelectorAll('[data-target]').forEach(el => {
+            const target = parseFloat(el.getAttribute('data-target'));
+            animateCounter(el, target);
+        });
+
+        // 2. FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const answer = item.querySelector('.faq-answer');
+                const isOpen = answer.style.height && answer.style.height !== '0px';
+
+                // Close all others
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    a.style.height = '0px';
+                });
+
+                if (!isOpen) {
+                    answer.style.height = answer.scrollHeight + 'px';
+                }
+            });
+        });
+
+
+
+
+        // --- SOCIAL PROOF WALL LOGIC (FINAL MASONRY) ---
+        const socialProofData = [
+            // GOOGLE REVIEWS (Priority)
+            { type: 'review', text: "Absolutely love my Breath teardrop camper. It is so compact but has everything I need.", author: "Maureen Clark", date: "2 months ago", stars: 5 },
+            { type: 'review', text: "Patricio's customer service and communication is amazing. The quality is outstanding regarding materials and finish.", author: "Fernanda C.", date: "5 months ago", stars: 5 },
+            { type: 'review', text: "It’s the best little caravan design. It’s so sturdy and well made for off-road. Tows like a dream behind my Subaru.", author: "James Evans", date: "1 month ago", stars: 5 },
+            { type: 'review', text: "From the start of the build process it was an absolute pleasure working with the Breath Trailer Team. They customized everything.", author: "Colleen Szabo", date: "3 months ago", stars: 5 },
+            { type: 'review', text: "The people at Breath put their hearts into designing you a reliable Go Anywhere caravan. We've been everywhere with it.", author: "Judith B.", date: "6 months ago", stars: 5 },
+            { type: 'review', text: "We spent 3 weeks off-grid and the solar/battery setup was flawless. Didn't need to plug in once.", author: "Sarah & Mike", date: "4 months ago", stars: 5 },
+            { type: 'review', text: "Compact, stylish, and incredibly functional. Highly recommend to anyone looking to downsize.", author: "David P.", date: "2 weeks ago", stars: 5 },
+            { type: 'review', text: "The attention to detail is second to none. Felt completely safe in rough terrain.", author: "Chris M.", date: "1 month ago", stars: 5 },
+            { type: 'review', text: "Best decision we ever made. Freedom to explore without the bulk.", author: "Elise & Dan", date: "8 months ago", stars: 5 },
+            { type: 'review', text: "Super lightweight, I can move it by hand if needed. Incredible engineering.", author: "Robert K.", date: "3 weeks ago", stars: 5 },
+            { type: 'review', text: "Customer support has been legendary even after purchase.", author: "Monica L.", date: "6 months ago", stars: 5 },
+
+            // PRESS & AWARDS
+            { type: 'press', title: "The Lightweight Adventure: Breath Trailer Review", source: "RV Daily", badge: "Review", img: "https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers2-6-AE0pkbwM9qsnJ5E2.jpg", url: "#" },
+            { type: 'press', title: "Innovation in Compact Caravans: A New Era", source: "AutoEvolution", badge: "Featured", img: "https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-5-1--min-AMqny1RVrkFQwzXp.jpg", url: "#" },
+            { type: 'award', title: "Sydney Design Awards 2025", rank: "GOLD WINNER", desc: "Product Design - Sport & Active Life", url: "#" },
+            { type: 'impact', title: "100 Trees Planted", desc: "For every Breath Trailer sold", icon: "🌱" },
+            { type: 'impact', title: "Verified Reviews", desc: "300+ Happy Customers", icon: "★" },
+
+            // VIDEOS
+            { type: 'video', title: "Maureen's Journey", author: "Maureen", thumb: "https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breathtrailers-1-min-YKbJQ3noE6sPVVrE.jpg", videoId: "qwiavhmtpc" },
+            { type: 'video', title: "Off-Grid Setup", author: "Ben", thumb: "https://assets.zyrosite.com/AE0vv1Gy1bSpOzp4/breath-ultra-in-snow-AwvDB1qvgxu914Km.jpeg", videoId: "208j22fnl5" },
+        ];
+
+        // Helper to generate a Short card HTML
+        const getShortCard = (item) => {
+            // ... Logic for short variant ...
+            // We can reuse render card logic but enforce short class
+            return renderCardHTML(item, 'short');
+        };
+
+        const renderCardHTML = (item, heightClass) => {
+            let html = '';
+            let classes = `sp-card ${heightClass}`;
+
+            if (item.type === 'review') {
+                classes += ' review';
+                html = `
+            <div class="review-header">
+                <span class="review-stars">★★★★★</span>
+                <span style="font-size:0.7rem; opacity:0.5; text-transform:uppercase; letter-spacing:0.05em;">Google</span>
+            </div>
+            <p class="review-body">"${item.text}"</p>
+            <div class="review-meta">
+                <span>${item.author}</span>
+                <span style="opacity:0.4; font-weight:400; margin-left:auto;">${item.date}</span>
+            </div>
+        `;
+            } else if (item.type === 'press') {
+                classes += ' press';
+                html = `
+            <img src="${item.img}" class="press-image" alt="${item.title}">
+            <div class="press-content">
+                <span class="press-badge">${item.source}</span>
+                <h3 class="press-title">${item.title}</h3>
+            </div>
+        `;
+            } else if (item.type === 'award') {
+                classes += ' award';
+                html = `
+            <div style="padding:1.5rem; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                <div style="color:#D4AF37; font-weight:700; margin-bottom:0.5rem; font-size:0.9rem;">${item.rank}</div>
+                <div style="font-family:var(--font-serif); font-size:1.3rem; line-height:1.2; margin-bottom:0.5rem;">${item.title}</div>
+                <div style="font-size:0.7rem; opacity:0.7;">${item.desc}</div>
+            </div>
+        `;
+            } else if (item.type === 'impact') {
+                classes += ' award';
+                html = `
+            <div style="padding:1.5rem; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                <div style="font-size:2rem; margin-bottom:0.5rem;">${item.icon}</div>
+                <div style="font-family:var(--font-serif); font-size:1.2rem; line-height:1.2; margin-bottom:0.5rem;">${item.title}</div>
+                <div style="font-size:0.75rem; opacity:0.7;">${item.desc}</div>
+            </div>
+        `;
+            } else if (item.type === 'video') {
+                classes += ' video';
+                html = `
+            <img src="${item.thumb}" class="video-thumb" alt="${item.title}">
+            <div class="play-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="video-overlay-text">
+                <div style="font-family:var(--font-serif); font-size:1.1rem;">${item.title}</div>
+            </div>
+        `;
+            }
+
+            // Add click handlers later via delegation or direct set in loop
+            return { html, classes, type: item.type, data: item };
+        };
+
+        const createCardElement = (rendered) => {
+            const div = document.createElement('div');
+            div.className = rendered.classes;
+            div.innerHTML = rendered.html;
+
+            if (rendered.type === 'video') div.onclick = () => openVideoModal(rendered.data.videoId);
+            else if (rendered.type === 'press') div.onclick = () => { }; // Link logic
+
+            return div;
+        };
+
+        const initMasonryWall = () => {
+            const track = document.getElementById('wall-track-unified');
+            const allItems = [...socialProofData];
+
+            // Strategy: Create Columns
+            // Pattern: Tall | Short+Short | Tall | Short+Short...
+
+            // Split items
+            const tallItems = [];   // Long Reviews, Videos
+            const shortItems = [];  // Short Reviews, Awards, Press
+
+            allItems.forEach(item => {
+                if (item.type === 'video' || item.text?.length > 100) {
+                    tallItems.push(item);
+                } else {
+                    shortItems.push(item);
+                }
+            });
+
+            // Build Columns loop
+            const columnsFragment = document.createDocumentFragment();
+
+            // Create ~10 columns pattern
+            for (let i = 0; i < 12; i++) {
+                // Alternate Tall vs Stacked
+                if (i % 2 === 0) {
+                    // Tall Column
+                    const item = tallItems[i % tallItems.length];
+                    const col = document.createElement('div');
+                    col.className = 'sp-column';
+                    col.appendChild(createCardElement(renderCardHTML(item, 'tall')));
+                    columnsFragment.appendChild(col);
+                } else {
+                    // Stacked Column
+                    const col = document.createElement('div');
+                    col.className = 'sp-column';
+
+                    const item1 = shortItems[(i * 2) % shortItems.length];
+                    const item2 = shortItems[(i * 2 + 1) % shortItems.length];
+
+                    col.appendChild(createCardElement(renderCardHTML(item1, 'short')));
+                    col.appendChild(createCardElement(renderCardHTML(item2, 'short')));
+
+                    columnsFragment.appendChild(col);
+                }
+            }
+
+            // CLONE for marquee (x3)
+            track.appendChild(columnsFragment.cloneNode(true));
+            track.appendChild(columnsFragment.cloneNode(true));
+            track.appendChild(columnsFragment.cloneNode(true));
+        };
+
+        // Modal Logic
+        const modal = document.getElementById('sp-modal');
+        const modalContent = document.getElementById('sp-modal-content');
+
+        window.closeModal = () => {
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modalContent.innerHTML = '';
+            }, 300);
+        };
+
+        const openVideoModal = (id) => {
+            modalContent.innerHTML = `
+        <div style="position:relative; padding-bottom:56.25%; height:0; width:80vw; max-width:1000px; background:#000;">
+             <iframe src="https://fast.wistia.net/embed/iframe/${id}?videoFoam=true&autoPlay=true" title="Video" allow="autoplay; fullscreen" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen msallowfullscreen width="100%" height="100%" style="position:absolute; top:0; left:0;"></iframe>
+        </div>
+    `;
+            modal.classList.add('active');
+        };
+
+        // Start
+        initMasonryWall();
+
+        // Scroll to Wall of Reviews (Restored/Updated)
+        function scrollToReviews() {
+            document.getElementById('social-proof').scrollIntoView({ behavior: 'smooth' });
+        }
+
+
         // Wistia Video Background Auto-play on Scroll
         window._wq = window._wq || [];
         _wq.push({
@@ -1499,9 +2791,9 @@
                 smallPlayButton: false,
                 playButton: false
             },
-            onReady: function(video) {
+            onReady: function (video) {
                 const videoSection = document.getElementById('video-experience');
-                
+
                 // Force immediate play
                 video.mute();
                 video.play();
@@ -1526,7 +2818,7 @@
                 });
 
                 // Set video to loop
-                video.bind('end', function() {
+                video.bind('end', function () {
                     video.time(0).play();
                 });
 
@@ -1656,13 +2948,13 @@
             stagger: 0.05,
             ease: 'power3.out'
         })
-        .to(loaderChars, {
-            y: -50,
-            opacity: 0,
-            duration: 0.5,
-            stagger: 0.03,
-            ease: 'power3.in'
-        }, '+=0.5');
+            .to(loaderChars, {
+                y: -50,
+                opacity: 0,
+                duration: 0.5,
+                stagger: 0.03,
+                ease: 'power3.in'
+            }, '+=0.5');
 
         // Hero Animations
         function initHeroAnimations() {
@@ -1692,23 +2984,23 @@
                 stagger: 0.03,
                 ease: 'power3.out'
             })
-            .to(subheadline, {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power3.out'
-            }, '-=0.5')
-            .to(cta, {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power3.out'
-            }, '-=0.5')
-            .to(scrollIndicator, {
-                opacity: 1,
-                duration: 0.8,
-                ease: 'power3.out'
-            }, '-=0.3');
+                .to(subheadline, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                }, '-=0.5')
+                .to(cta, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                }, '-=0.5')
+                .to(scrollIndicator, {
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                }, '-=0.3');
 
             // Hero scroll effect
             gsap.to('.hero-content', {
@@ -1949,4 +3241,5 @@
         });
     </script>
 </body>
+
 </html>
